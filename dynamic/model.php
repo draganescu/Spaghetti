@@ -28,6 +28,10 @@ class db
 		}
 	    $query = call_user_func_array('sprintf', $args);
 	    $result = mysql_query($query) or die(mysql_error());
+	    if($result === true)
+		{
+		   return true; 	
+		}
 		while ($row = mysql_fetch_assoc($result)) {
 		    $data[] = $row;
 		}

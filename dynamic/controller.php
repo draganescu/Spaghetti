@@ -66,7 +66,7 @@ class the
 			if($parts[1] != "")
 				$this->uri_segments = explode("/", $parts[1]);
 		
-		$cwd = explode('/', __FILE__);
+		$cwd = explode(DIRECTORY_SEPARATOR, __FILE__);
 		unset($cwd[count($cwd)-1]);
 		$cwd = implode('/', $cwd);
 		define('BASE', $cwd.'/');
@@ -99,7 +99,7 @@ class the
 				}
 				else
 				{
-					include BASE.'/models/'.$model.'.php';
+					include BASE.'models/'.$model.'.php';
 					$this->objects[$model] = new $model();
 					$object = $this->objects[$model];
 					$object->$method();

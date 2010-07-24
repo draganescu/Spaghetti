@@ -56,11 +56,31 @@ Released   : 20100704
 					
 
 					<div class="post">
-						<h2 class="title"><a href="#"> The first post </a></h2>
+						<h2 class="title"><a href="#"> Some new post title </a></h2>
 						<p class="meta">Posted by <a href="missing_author_profile">missing_author_name</a> on March 10, 2008
 							&nbsp;&bull;&nbsp; <a href="/comments/1" class="comments">Comments (missing_comments_number)</a> &nbsp;&bull;&nbsp; <a href="missing_post_link" class="permalink">Full article</a></p>
 						<div class="entry">
-							I got deleted the last time.
+							Yay on windows!!
+						</div>
+					</div>
+				
+
+					<div class="post">
+						<h2 class="title"><a href="#"> Test the mysql functions </a></h2>
+						<p class="meta">Posted by <a href="missing_author_profile">missing_author_name</a> on March 10, 2008
+							&nbsp;&bull;&nbsp; <a href="/comments/2" class="comments">Comments (missing_comments_number)</a> &nbsp;&bull;&nbsp; <a href="missing_post_link" class="permalink">Full article</a></p>
+						<div class="entry">
+							YAyy
+						</div>
+					</div>
+				
+
+					<div class="post">
+						<h2 class="title"><a href="#"> Some greatness </a></h2>
+						<p class="meta">Posted by <a href="missing_author_profile">missing_author_name</a> on March 10, 2008
+							&nbsp;&bull;&nbsp; <a href="/comments/3" class="comments">Comments (missing_comments_number)</a> &nbsp;&bull;&nbsp; <a href="missing_post_link" class="permalink">Full article</a></p>
+						<div class="entry">
+							Thank you God!
 						</div>
 					</div>
 				
