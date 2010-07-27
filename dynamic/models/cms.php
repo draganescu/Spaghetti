@@ -2,17 +2,11 @@
 class cms
 {
 	
-	
 	function theposts()
 	{
 		
 		$db = the::database();
 		return $db->get_some_posts(10,0);
-	}
-	
-	function pagetitle()
-	{
-		return "The cms page title";
 	}
 	
 	function themenu()
