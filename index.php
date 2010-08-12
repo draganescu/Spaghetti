@@ -4,8 +4,8 @@ $blog = the::app();
 $blog->theme = 'interchange';
 $blog->default = 'index';
 
-$blog->observe('before_run','cms','cache');
 $blog->cache_life = 0;
+$blog->observe('before_run','cms','cache');
 $blog->observe('before_output','cms','cache');
 
 $blog->server('localhost','development');
