@@ -1,0 +1,22 @@
+The wordpress of php frameworks
+
+Features
+- one definition file
+- html templates
+- MvC
+- very small footprint
+- simple
+- neat
+
+How it works
+
+Design your app
+Create a complete html mockup
+
+
+Templating the app
+Spaghetti assumes you have taken the time to create a complete html mockup of your website
+
+Design->Mockup->Integrate->Code
+
+

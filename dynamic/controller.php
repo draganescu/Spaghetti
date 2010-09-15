@@ -34,6 +34,8 @@ class the
 	// assumes html but can be set
 	var $tpl_file_extension = 'html';
 	
+	// replacements
+	var $replace = array();
 	// raw template
 	var $template_data = "";
 	// the result of all the work
@@ -134,6 +136,12 @@ class the
 		}
 	}
 	
+	// set data to be replaced in all templates
+	function replace($what, $with, $where = ".*")
+	{
+		$this->replace[$where][] = array($what,$with);
+	}
+	
 	function output()
 	{
 		$this->load();
@@ -164,6 +172,16 @@ class the
 			$file = $file[1];
 		}
 		$this->template_data = file_get_contents(BASE.'../static/'.$this->theme.'/'.$file.'.'.$this->tpl_file_extension);
+		
+		// replacing global data
+		foreach ($this->replace as $where => $replacements) {
+			if(preg_match("|".$where."|", $this->uri_string))
+			{
+				foreach ($replacements as $value) {
+					$this->template_data = str_replace($value[0], $value[1], $this->template_data);
+				}
+			}
+		}
 		
 		
 		// todo:add check $res if there are no matches
@@ -368,13 +386,6 @@ class the
         if (array_key_exists($name, $this->config)) {
             return $this->config[$name];
         }
-
-        $trace = debug_backtrace();
-        trigger_error(
-            'Undefined property via __get(): ' . $name .
-            ' in ' . $trace[0]['file'] .
-            ' on line ' . $trace[0]['line'],
-            E_USER_NOTICE);
         return null;
     }
 
