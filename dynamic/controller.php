@@ -7,8 +7,10 @@ class the
 	var $base_file = "index.php"; // the file where the app is defined
 	
 	// try to set it all at runtime
+	var $index_file = "index.php";
 	var $uri_string = "";
-	var $base_uri = array(); // the segments of the URI
+	var $link_uri = ""; // the segments of the URI
+	var $base_uri = ""; // the segments of the URI
 	var $uri_segments = array(); // these are used to set parameters via URL in any called model
 	
 	var $theme = ""; // the folder where the templates are
@@ -60,8 +62,10 @@ class the
 		// find base URI
 		$data = explode($this->base_file,str_replace('//','/',dirname($_SERVER['PHP_SELF']).'/'));
 		$this->base_uri = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$data[0];
-			
+		
 		$this->uri_string = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		
+		$this->link_uri = $this->base_uri.$this->index_file;
 		
 		$parts = explode($this->base_file.'/', $this->uri_string);
 		if(array_key_exists(1, $parts))
@@ -198,8 +202,14 @@ class the
 				$this->models_methods_print[] = array($methodstarts[4][$k],$methodstarts[5][$k]);
 		}
 		
+		// manage relative links
+		$this->template_data = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'/$3"', $this->template_data);
+		
 		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />";
 		$this->output = str_replace('<head>', "<head>\n".$base, $this->template_data);
+		
+		
+		
 		$this->dispatch('template_parsed');
 	}
 	

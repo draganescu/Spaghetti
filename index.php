@@ -4,14 +4,13 @@ $blog = the::app();
 $blog->theme = 'interchange';
 $blog->default = 'index';
 
-$blog->template('cms$', 'index');
-$blog->template('cms/posts/\d', 'post');
+$blog->template('/\d', 'post');
 
 // cms admin pages, this could get lenghty for a complex system?
 // oh noes :) just create a new admin.php file.
 
-$blog->template('cms/admin(/?)$', 'admin', 'cmsadmintheme');
-$blog->template('cms/admin/new', 'new', 'cmsadmintheme');
+$blog->template('/admin(/?)$', 'admin', 'cmsadmintheme');
+$blog->template('/admin/new', 'new', 'cmsadmintheme');
 
 // more
 
