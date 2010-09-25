@@ -32,4 +32,3 @@ $blog->replace('<h1><a href="index.html">Web App Theme</a></h1>', '<h1><a href="
 
 
 $blog->run();
-?>

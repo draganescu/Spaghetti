@@ -105,7 +105,7 @@ class the
 				}
 				else
 				{
-					include BASE.'models/'.$model.'.php';
+					include BASE.'models/'.$model.'/class.php';
 					$this->objects[$model] = new $model();
 					$object = $this->objects[$model];
 					$object->$method();
@@ -339,18 +339,18 @@ class the
 		{
 			if(!array_key_exists($model, $this->objects))
 			{
-				if(!file_exists(BASE.'models/'.$model.'.php'))
+				if(!file_exists(BASE.'models/'.$model.'/class.php'))
 				{
 					echo '<!-- missing_model_'.$model.' -->';
 					continue;
 				}
-				include BASE.'models/'.$model.'.php';
+				include BASE.'models/'.$model.'/class.php';
 				$object = new $model();
 				$this->objects[$model] = $object;
 			}
-			if(file_exists(BASE.'/models/'.$model."_sql.php"))
+			if(file_exists(BASE.'/models/'.$model."/sql.php"))
 			{
-				include BASE.'/models/'.$model."_sql.php";
+				include BASE.'/models/'.$model."/sql.php";
 				$this->database->querries = array_merge($this->database->querries, $querries);
 			}
 

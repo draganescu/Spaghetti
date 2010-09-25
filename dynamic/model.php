@@ -70,7 +70,7 @@ class db
 	function install($model)
 	{
 		$app = the::app();
-		include BASE.'/models/'.$model."_install.php";
+		include BASE.'/models/'.$model."/install.php";
 		if(!is_array($upgrade))
 			return false;
 			
