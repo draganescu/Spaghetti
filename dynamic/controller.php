@@ -202,8 +202,7 @@ class the
 				$this->models_methods_print[] = array($methodstarts[4][$k],$methodstarts[5][$k]);
 		}
 		
-		// manage relative links
-		$this->template_data = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'/$3"', $this->template_data);
+		
 		
 		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />";
 		$this->output = str_replace('<head>', "<head>\n".$base, $this->template_data);
@@ -294,6 +293,9 @@ class the
 			}	
 			$this->output = substr_replace($this->output, $rendered_data, $pos1, $pos2);
 		}
+		// manage relative links
+		$this->output = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'/$3"', $this->output);
+		
 		$this->dispatch('after_render');
 		
 	}
