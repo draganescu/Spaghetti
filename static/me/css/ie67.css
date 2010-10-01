@@ -1,0 +1,111 @@
+body
+{
+	width:940px;
+	left:50%;
+	margin-left: -470px;
+	padding-left:10px;
+	padding-right:10px;
+	
+	position: relative;
+}
+
+* html body
+{
+	margin: auto;
+	margin-top: 40px;
+	left:0;
+}
+
+
+#resume
+{
+	float:none;
+	clear:both;
+}
+
+* html #header,
+{
+	margin-right:0;
+	z-index:10;
+}
+
+* html #resume, * html #cover_letter
+{
+	margin-left:0;
+}
+
+#post, #about
+{
+	margin-left:0;
+}
+
+* html #post
+{
+	margin-top: 20px;
+}
+
+#about
+{
+	float: left;
+	width: 320px;
+	margin-top: 20px;
+}
+
+* html #about
+{
+	float: left;
+	width: 300px;
+	margin-top: -100px;
+}
+
+* html .blog_html #ideas
+{
+	float: none;
+	clear: both;
+	margin-top: 40px;
+	width: 300px;
+}
+
+.name_h
+{
+	display: block;
+	cursor: pointer;
+}
+
+* html .blog_html #tools
+{
+	margin-left:300px;
+	margin-top: -163px;
+	width: 300px;
+}
+
+* html #resume
+{
+	position:relative;
+	left:460px;
+}
+
+#recent_work, #recent_posts, #ideas, #tools
+{
+	width:250px;
+}
+
+#twitter
+{
+	width:490px;
+}
+
+* html #recent_work, * html #recent_posts, * html #ideas, * html #tools
+{
+	width:230px;
+}
+
+
+* html #twitter
+{
+	width:470px;
+}
+
+legend{
+	margin-left: -5px;;
+}

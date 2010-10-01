@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-<base href='http://local.host/gitspaghetti/static/me/' />
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>Andrei Draganescu</title>	
 		
@@ -16,7 +15,7 @@
 	<body class="blog_html">
 		
 		<div id="header">
-			<a href="http://local.host/gitspaghetti/index.php//" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
+			<a href="index.html?su=/" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
 
 			<h2 id="slogan">visionary and skillful <br/> information architect and developer </h2>
 
@@ -46,8 +45,13 @@
 			<h3 class="blog_t">Things i've learned</h3>
 
 			<ul id="blog_l">
-				missing_metodblog_recent_posts
-				
+				<!-- render.blog.recent_posts -->
+				<li class="blog_i"><a href="blog.html?su=/posts/<!-- print.post_id >1<!-- /print.post_id -->" class="blog_h">Squeezing the social out of Wordpress</a></li>
+				<!-- /render.blog.recent_posts -->
+				<!-- remove -->
+				<li class="blog_i"><a href="blog.html" class="blog_h">Securing tedybears</a></li>
+				<li class="blog_i"><a href="blog.html" class="blog_h">Lessons from good ol’ Ford</a></li>
+				<!-- /remove -->
 			</ul>
 
 			<a id="blog" href="archive.html">more open source experiences</a>
@@ -90,19 +94,19 @@
 			</ul>
 		</div>
 		
-		<!-- render.cms.send_form -->
-<form action="contact.html?su=pages/thanks" id="contact_form">
-	<fieldset id="contact_me">
-		<legend>Where do you need the elite?</legend>
-		<label class="email_label" for="email">Your email</label>
-		<input type="text" id="email" name="email" />
+		<!-- dry.contact_form -->
+		<form action="contact.html?su=pages/thanks" id="contact_form">
+			<fieldset id="contact_me">
+				<legend>Where do you need the elite?</legend>
+				<label class="email_label" for="email">Your email</label>
+				<input type="text" id="email" name="email" />
 
-		<label class="message_label" for="message">Your message</label>
-		<textarea name="message" id="message"></textarea>
-	</fieldset>
-	<input type="submit" id="send" name="send" value="Send" />
-</form>
-<!-- /render.cms.send_form -->
+				<label class="message_label" for="message">Your message</label>
+				<textarea name="message" id="message"></textarea>
+			</fieldset>
+			<input type="submit" id="send" name="send" value="Send" />
+		</form>
+		<!-- /dry.contact_form -->
 		
 	</body>
 </html>

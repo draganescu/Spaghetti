@@ -1,34 +1,31 @@
 <?php
 include 'dynamic/controller.php';
-$blog = the::app();
-$blog->theme = 'interchange';
-$blog->default = 'index';
+$portofolio = the::app();
+$portofolio->theme = 'me';
+$portofolio->default = 'index';
 
-$blog->template('/\d', 'post');
+$portofolio->index_file = ""; // using htaccess
 
-// cms admin pages, this could get lenghty for a complex system?
-// oh noes :) just create a new admin.php file.
+$portofolio->template("/projects/*","migrations");
+$portofolio->template("/posts/*","blog");
 
-$blog->template('/admin(/?)$', 'admin', 'cmsadmintheme');
-$blog->template('/admin/new', 'new', 'cmsadmintheme');
+/* admin */
+$portofolio->template("/admin(/?)","login");
+$portofolio->template("/admin/posts/new","addposts");
+$portofolio->template("/admin/posts/list","listposts");
+$portofolio->template("/admin/ideas/new","addideas");
+$portofolio->template("/admin/ideas/list","listideas");
+$portofolio->template("/admin/resume/new","addresumt");
+$portofolio->template("/admin/resume/list","listresume");
+$portofolio->template("/admin/work/new","addwork");
+$portofolio->template("/admin/work/list","listwork");
 
-// more
-
-$blog->cache_life = 0;
-$blog->observe('before_run','cms','cache');
-$blog->observe('before_output','cms','cache');
-
-$blog->server('localhost','development');
-$blog->server('local.host','production');
-
-$blog->connection('local.host', 'localhost', 'testdb', 'root', '');
-$blog->connection('localhost', 'localhost', 'testdb', 'root', '');
-
-// advanced
-
-$blog->replace('<title>Web App Theme</title>', '<title>Blog admin</title>', 'cms/admin.*');
-$blog->replace('<h1><a href="index.html">Web App Theme</a></h1>', '<h1><a href="index.html?/cms">Lovely blog</a></h1>', 'cms/admin.*');
+$portofolio->observe("");
 
 
+$portofolio->server('localhost','development');
+$portofolio->server('mindware.ro','production');
 
-$blog->run();
+$portofolio->connection('localhost', 'localhost', 'portofolio', 'root', '');
+
+$portofolio->run();

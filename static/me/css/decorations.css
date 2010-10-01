@@ -1,0 +1,60 @@
+#name
+{
+	background: url(../images/facetime.jpg) no-repeat;
+	background-position:top right;
+}
+
+#twitter
+{
+	background: url(../images/twitter.jpg) no-repeat;
+	background-position:400px 50%;
+}
+
+.dashboard_html #twitter
+{
+	background: none;
+}
+
+
+table thead tr
+{
+	border-bottom: 1px solid #c6c6c6;
+}
+
+input
+{
+	border: 1px solid #999;
+	background-color: #fff;
+}
+
+#cover_letter, #resume
+{
+	border-left: 1px solid #c6c6c6;
+}
+
+#about
+{
+	border-bottom: 1px solid #c6c6c6;
+}
+
+li
+{
+	list-style: disc inside;
+}
+
+#contact_form, #twitter, #ideas, #tools
+{
+	border-top: 1px solid #c6c6c6;
+}
+
+.dashboard_html #contact_form, .dashboard_html #twitter, .dashboard_html #ideas, .dashboard_html #tools
+{
+	border: none;
+}
+
+code
+{
+	background-image: url(../images/code.gif);
+}
+
+

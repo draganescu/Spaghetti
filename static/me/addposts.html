@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Andrei Draganescu</title>	
+		
+		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/typography.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/decorations.css" type="text/css" media="all" title="style" />
+		<!--[if lt IE 8]>
+			<link rel="stylesheet" href="css/ie67.css" type="text/css" media="all" title="style" />
+		<![endif]-->
+	</head>
+	<body class="edit_html">
+		
+		<div id="header">
+			<a href="dashboard.html?su=/admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
+
+			<h2 id="slogan">Data management</h2>
+			
+			<a id="contact" href="login.html?su=/admin/logout">Log out</a>
+		</div>
+		
+		<div id="post">
+			<h2 class="post_t">Add / Edit Post</h2>
+			
+			<!-- render.cms.manage_post -->
+			<form action="#" method="post">
+				<label class="title_label" for="title">Title</label>
+				<input type="text" id="title" name="title" />
+
+				<label class="content_label" for="content">Body</label>
+				<textarea name="content" id="content"></textarea>
+				
+				<label></label>
+				<input type="submit" id="save" name="save" value="Save" />
+				<!-- remove -->
+				<a href="listposts.html">Continue</a>
+				<!-- /remove -->
+			</form>
+			<!-- /render.cms.manage_post -->
+			
+		</div>
+		
+		<div id="about">
+			<h3 class="about_t">Help</h3>
+
+			<p class="about_p">Manage blog posts
+		</div>
+		
+		<div id="work_menu" class="sidebar_block">
+			<h3 class="recent_work_t">Work</h3>
+
+			<ul class="recent_work_l">
+				<li class="recent_work_i"><a href="listwork.html?su=/admin/work/list" class="recent_work_h">List entries</a></li>
+				<li class="recent_work_i"><a href="addwork.html?su=/admin/work/new" class="recent_work_h">Add new entry</a></li>
+			</ul>
+		</div>
+		
+		<div id="blog_menu" class="sidebar_block">
+			<h3 class="blog_t">Blog</h3>
+
+			<ul id="blog_l">
+				<li class="blog_i"><a href="listposts.html?su=/admin/posts/list" class="blog_h">List entries</a></li>
+				<li class="blog_i"><a href="addposts.html?su=/admin/posts/new" class="blog_h">Add new endtry</a></li>
+			</ul>
+
+		</div>
+		
+		<div id="ideas_menu" class="sidebar_block">
+			<h3 class="ideas_t">Projects</h3>
+
+			<ul id="ideas_l">
+				<li class="ideas_i"><a href="listideas.html?su=/admin/ideas/list" class="ideas_h">List entries</a></li>
+				<li class="ideas_i"><a href="addideas.html?su=/admin/ideas/new" class="ideas_h">Add new endtry</a></li>
+			</ul>
+		</div>
+		
+		<div id="tools_menu" class="sidebar_block">
+			<h3 class="tools_t">Resume</h3>
+
+			<ul id="tools_l">
+				<li class="tools_i"><a href="listresume.html?su=/admin/resume/list" class="tools_h">List entries</a></li>
+				<li class="tools_i"><a href="addresume.html?su=/admin/resume/new" class="tools_h">Add new endtry</a></li>
+			</ul>
+		</div>
+		
+		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

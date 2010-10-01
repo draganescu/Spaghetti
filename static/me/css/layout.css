@@ -1,0 +1,305 @@
+html
+{
+	margin:auto;
+	width:940px;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top: 40px;
+}
+
+body
+{
+	position:relative;
+}
+
+h1, h2, h3, h4
+{
+	margin-bottom: 10px;
+}
+
+p
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.resume_item_t
+{
+	margin-bottom: 2px;
+}
+
+#slogan, #contact
+{
+	position: relative;
+	top:-10px;
+}
+
+table
+{
+	width: 100%;
+}
+
+
+table th,
+table td
+{
+	padding: 10px;
+}
+
+
+.blog_html #recent_posts,
+.blog_html #ideas,
+.blog_html #tools,
+.blog_html #recent_work,
+.blog_html #twitter
+{
+	position: relative;
+	top:0;
+	left:0;
+}
+
+#post
+{
+	width:600px;
+	float: left;
+	margin-top: 150px;
+}
+
+#about
+{
+	width: 340px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	margin-left: 600px;
+	margin-bottom: 20px;
+}
+
+.blog_html #recent_posts,
+.blog_html #recent_work
+{
+	margin-left: 620px;
+}
+
+.blog_html #ideas
+{
+	float: none;
+	clear: both;
+	margin-top: 150px;
+	width: 300px;
+}
+
+.blog_html #tools
+{
+	margin-left:300px;
+	margin-top: -161px;
+	width: 300px;
+}
+
+#post
+{
+	margin-right:-400px;
+}
+
+.edit_html #post
+{
+	min-height:600px;
+}
+
+#work ul
+{
+	margin-bottom: 20px;
+	padding-left: 20px;
+}
+
+body div.sidebar_block
+{
+	height: auto;
+	float: left;
+	width: auto;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	margin-left: 440px;
+}
+
+
+.blog_html #contact_form
+{
+	margin-top: 60px;
+}
+
+
+.col
+{
+	float: left;
+	width: 260px;
+	margin-right: 20px;
+}
+
+li
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#work, #blog
+{
+	display: block;	
+	margin-top: 10px;
+}
+
+#cv
+{
+	margin-bottom: 20px;
+	display: block;
+}
+
+#contact_form
+{
+	width:860px;
+	float: none;
+	clear: both;
+	padding:40px;
+	position: relative;
+	margin-bottom: 150px;
+}
+
+label
+{
+	display: block;
+	clear: both;
+	float: none;
+	margin-bottom: 15px;
+	padding-top: 10px;
+}
+
+input
+{
+	width:200px;
+	padding: 2px;
+}
+
+textarea
+{
+	width:500px;
+	height: 150px;
+}
+
+#send
+{
+	width:80px;
+	position: absolute;
+	top: 99px;
+	left: 780px;
+}
+
+.message_label, #message
+{
+	position: absolute;
+	left:260px;
+	top:99px;
+}
+
+.message_label
+{
+	top:57px;
+}
+
+p.resume_description
+{
+	margin-top: 0;
+}
+
+#ideas
+{
+	top:340px;
+	padding-top: 20px;
+}
+
+#tools
+{
+	top:340px;
+	left:240px;
+	padding-top: 20px;
+}
+
+#twitter
+{
+	position: absolute;
+	top: 500px;
+	left: 0px;
+	margin-top: 50px;
+	width: 480px;
+	padding-top: 20px;
+}
+
+#twitter p
+{
+	width: 80%;
+}
+
+#recent_posts,
+#blog_posts
+{
+	top:180px;
+	left:230px;
+}
+
+#recent_work
+{
+	top:180px;
+}
+
+#recent_work, #recent_posts, #ideas, #tools, #blog_posts
+{
+	width: 240px;
+	height: 140px;
+	position: absolute;
+}
+
+#contact
+{
+	float: none;
+	clear: both;
+}
+
+#header
+{
+	width: 460px;
+	float: left;
+	margin-right: -560px;
+}
+
+#name
+{
+	width: 87%;
+}
+
+#cover_letter
+{
+	width: 440px;
+	float: left;
+	margin-left: 480px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	margin-top: 20px;
+}
+
+#resume
+{
+	width: 440px;
+	float: left;
+	margin-left: 480px;
+	padding-left: 20px;
+}
+
+code
+{
+	padding-left: 40px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+}
+
+
