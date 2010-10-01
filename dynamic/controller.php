@@ -66,12 +66,14 @@ class the
 		
 		$this->uri_string = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
-		$this->link_uri = $this->base_uri.$this->index_file;
-		
-		$parts = explode($this->base_file.'/', $this->uri_string);
+		$parts = explode($_SERVER['HTTP_HOST'].$data[0], $this->uri_string);
 		if(array_key_exists(1, $parts))
 			if($parts[1] != "")
 				$this->uri_segments = explode("/", $parts[1]);
+				
+		if(array_key_exists(0, $this->uri_segments))
+			if($this->uri_segments[0] == $this->index_file)
+				unset($this->uri_segments[0]);
 		
 		$cwd = explode(DIRECTORY_SEPARATOR, __FILE__);
 		unset($cwd[count($cwd)-1]);
@@ -354,6 +356,9 @@ class the
 	function load()
 	{
 		
+		include BASE.'model.php';
+		$this->database = db::connect();
+		
 		if(preg_match("|".$this->install_token."|", $this->uri_string))
 			$this->_install();
 		
@@ -367,10 +372,7 @@ class the
 		
 		if($this->template_data == "")
 			$this->_parse($this->default);
-		
-		include BASE.'model.php';
-		$this->database = db::connect();
-		
+				
 		foreach ($this->models as $model)
 		{
 			if(!array_key_exists($model, $this->objects))
@@ -405,8 +407,11 @@ class the
 		}
 		else
 		{
-			foreach ($this->models as $model)
+			$m = opendir(BASE.'models');
+			
+			while ($model = readdir($m))
 			{
+				if($model != "." && $model != "..")
 				$this->database->install($model);
 			}
 		}

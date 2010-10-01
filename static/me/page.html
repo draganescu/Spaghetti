@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-<base href='http://local.host/gitspaghetti/static/me/' />
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>Andrei Draganescu</title>	
 		
@@ -16,7 +15,7 @@
 	<body class="blog_html">
 		
 		<div id="header">
-			<a href="http://local.host/gitspaghetti/index.php//" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
+			<a href="index.html?su=/" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
 
 			<h2 id="slogan">visionary and skillful <br/> information architect and developer </h2>
 
@@ -24,15 +23,38 @@
 		</div>
 		
 		<div id="post">
-			<h2 class="post_t">Squeezing the social out of Wordpress</h2>
+			<h2 class="post_t">Migrations for CodeIgniter</h2>
 			
-			<div class="col">
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi zzril delenit Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.</p>
-			</div>
-			
-			<div class="col">
-				<p class="col">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi zzril delenit Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.</p>
-			</div>
+			<p>The easy and pretty Code Igniter Migrations Library. Well maybe the name is overdone a bit considering this is a rather simplistic approach, but somehow i have a strong feeling that a lot of people will find this to be an advantage (yes the overdone name, not the library itself).</p>
+			<p>Installing the library is nothing special:</p>
+			<ol>
+				<li><a href="http://mindware.ro/Migrations.php.zip">Download</a> and move the library into /application/libraries</li>
+				<li>Create a config file named schemata.php in /application/config and define an array named $config['schemata'] using DBForge style declarations from <a href="http://codeigniter.com/user_guide/database/forge.html">here</a>.</li>
+				<li>Add this code to your <span style="text-decoration:line-through;">main config.php</span> schemata.php file:<br>
+				<code>$config['enable_migrations']	= true;</code></li>
+				<li><span style="color:#ff6600;">That’s it, but remember if you already HAVE a database set then describe it first in the schemata file because otherwise all the tables will be deleted.</span></li>
+			</ol>
+			<p>Thats about all. Now, everytime you need to change something in your database just edit the schemata config file and visit your site. The database will be updated automatically.</p>
+		
+			<p>History of versions can be easily kept by commenting stuff. There are some particular settings to be remembered for the schemata config file:</p>
+			<p><code>'key' =&gt; 1</code><br>
+			sets the current field as key</p>
+			<p><code>'oldname' =&gt; 'old_name'</code><br>
+			sets the name of the modified column in case you alter the name.</p>
+			<p><code>'id' =&gt; ''</code><br>
+			a column named id with no properties will be an auto increment primary key according to DB Forge defaults.</p>
+			<p>Fixtures are sample data items inserted into the database at development time in order to have something to work with. The exquisitely simple migrations lib provided hereby, now offers fixtures as an <strong>optional</strong> configuration file.<br>
+			A sample code for this configuration file:<br>
+			<code><br>
+			$config['enable_fixtures'] = true;<br>
+			$config['fixtures'] = array<br>
+			(<br>
+				"tablename_table" =&gt; array<br>
+				(<br>
+					array("fieldname1"=&gt;"fieldvalue", "fieldname2"=&gt;"fieldvalue") // one record per array<br>
+				)<br>
+			);<br>
+			</code></p>
 			
 		</div>
 		
@@ -46,8 +68,13 @@
 			<h3 class="blog_t">Things i've learned</h3>
 
 			<ul id="blog_l">
-				missing_metodblog_recent_posts
-				
+				<!-- render.blog.recent_posts -->
+				<li class="blog_i"><a href="blog.html?su=/posts/<!-- print.post_id >1<!-- /print.post_id -->" class="blog_h">Squeezing the social out of Wordpress</a></li>
+				<!-- /render.blog.recent_posts -->
+				<!-- remove -->
+				<li class="blog_i"><a href="blog.html" class="blog_h">Securing tedybears</a></li>
+				<li class="blog_i"><a href="blog.html" class="blog_h">Lessons from good ol’ Ford</a></li>
+				<!-- /remove -->
 			</ul>
 
 			<a id="blog" href="archive.html">more open source experiences</a>
@@ -90,19 +117,19 @@
 			</ul>
 		</div>
 		
-		<!-- render.cms.send_form -->
-<form action="contact.html?su=pages/thanks" id="contact_form">
-	<fieldset id="contact_me">
-		<legend>Where do you need the elite?</legend>
-		<label class="email_label" for="email">Your email</label>
-		<input type="text" id="email" name="email" />
+		<!-- dry.contact_form -->
+		<form action="contact.html?su=pages/thanks" id="contact_form">
+			<fieldset id="contact_me">
+				<legend>Where do you need the elite?</legend>
+				<label class="email_label" for="email">Your email</label>
+				<input type="text" id="email" name="email" />
 
-		<label class="message_label" for="message">Your message</label>
-		<textarea name="message" id="message"></textarea>
-	</fieldset>
-	<input type="submit" id="send" name="send" value="Send" />
-</form>
-<!-- /render.cms.send_form -->
+				<label class="message_label" for="message">Your message</label>
+				<textarea name="message" id="message"></textarea>
+			</fieldset>
+			<input type="submit" id="send" name="send" value="Send" />
+		</form>
+		<!-- /dry.contact_form -->
 		
 	</body>
 </html>

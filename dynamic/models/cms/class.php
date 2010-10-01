@@ -4,16 +4,21 @@ class cms
 	
 	function login_check()
 	{
-		
+		session_start();
 		$p = the::app();
 		
 		if(!preg_match("|admin|", $p->uri_string))
 			return true;
 		
-		if($_SESSION["logged_in"] == true)
+		if(isset($_SESSION['loggedin']))
+		{
 			return true;
+		}
 		else
-			header("Location: ".$p->link_uri."/admin/");
+		{
+			if($_GET['login'] = false)
+				header("Location: ".$p->link_uri."/admin?login=true");
+		}
 	}
 	
 	function the_resume()
@@ -33,7 +38,17 @@ class cms
 		return "Now i dont.";
 	}
 	
+	function recent_work()
+	{
+		$db = the::database();
+		return $db->select_recent_post_titles(3);
+	}
 	
+	function the_ideas()
+	{
+		$db = the::database();
+		return $db->select_recent_ideas();
+	}
 	
 	
 	
