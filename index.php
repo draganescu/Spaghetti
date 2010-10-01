@@ -20,12 +20,12 @@ $portofolio->template("/admin/resume/list","listresume");
 $portofolio->template("/admin/work/new","addwork");
 $portofolio->template("/admin/work/list","listwork");
 
-$portofolio->observe("");
+$portofolio->observe('before_output','cms','login_check');
 
 
-$portofolio->server('localhost','development');
+$portofolio->server('local.host','development');
 $portofolio->server('mindware.ro','production');
 
-$portofolio->connection('localhost', 'localhost', 'portofolio', 'root', '');
+$portofolio->connection('local.host', 'localhost', 'portofolio', 'root', '');
 
 $portofolio->run();

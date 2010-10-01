@@ -33,11 +33,16 @@
 		
 		<div id="resume">
 			<h3 class="resume_t">Resume</h3>
+			<!-- render.cms.the_resume -->
+			<h4 class="resume_item_t"><span class="date"><!-- print.resume_date -->2008-11 - 2010-07<!-- /print.resume_date --></span>  : <!-- print.position -->project manager, TFOTW - Canada<!-- /print.position --></h4>
 
-			<h4 class="resume_item_t"><span class="date">2008-11 - 2010-07</span>  : project manager, TFOTW - Canada</h4>
-
-			<p class="resume_description">At TFOTW I managed a multi cultural team of people scattered across the globe and together we completed projects for companies such as Hyphen Digital (part of HCG / Omnicom) or Hydra LLC (operator of one of the most successful CPA ad networks)</p>
-
+			<p class="resume_description">
+				<!-- print.description -->
+				At TFOTW I managed a multi cultural team of people scattered across the globe and together we completed projects for companies such as Hyphen Digital (part of HCG / Omnicom) or Hydra LLC (operator of one of the most successful CPA ad networks)
+				<!-- /print.description -->
+			</p>
+			<!-- /render.cms.the_resume -->
+			<!-- remove -->
 			<h4 class="resume_item_t"><span class="date">2006-08 - 2008-12</span>  : business advisor, MediaPro Bucharest</h4>
 
 			<p class="resume_description">Providing information architecture and a technical perspective in many business strategic decisions i was a key player in the formation of the network and the delivery of a self sufficient business in record time.</p>
@@ -53,7 +58,7 @@
 			<h4 class="resume_item_t"><span class="date">2005-06 - 2005-12</span>  : local IT expert, European Profiles, Buch.</h4>
 
 			<p class="resume_description">with the international team of European Profiles, I designed, built and assembled the National Authority for Consumer Protection website, part of a wider European project.</p>
-
+			<!-- /remove -->
 			<a id="cv" href="cv.html">visit my CV for earlier dates and projects</a>
 		</div>
 			
@@ -64,8 +69,10 @@
 
 			<ul class="recent_work_l">
 				<li class="recent_work_i"><a href="http://butcherman.com.au" class="recent_work_h">http://butcherman.com.au</a></li>
+				<!-- remove -->
 				<li class="recent_work_i"><a href="http://ryderwear.com.au" class="recent_work_h">http://ryderwear.com.au</a></li>
 				<li class="recent_work_i"><a href="http://seotech.com.au" class="recent_work_h">http://seotech.com.au</a></li>
+				<!-- /remove -->
 			</ul>
 			<a id="work" href="work.html">see all work</a>
 		</div>
@@ -76,9 +83,13 @@
 			<h3 class="blog_t">Things i've learned</h3>
 
 			<ul id="blog_l">
-				<!-- render.cms.recent_posts -->
-				<li class="blog_i"><a href="blog.html?su=/posts/<!-- print.post_id >1<!-- /print.post_id -->" class="blog_h">Squeezing the social out of Wordpress</a></li>
-				<!-- /render.cms.recent_posts -->
+				<!-- render.cms.recent_post_titles -->
+				<li class="blog_i">
+					<a href="blog.html?su=/posts/<!-- print.id >1<!-- /print.id -->" class="blog_h">
+					<!-- print.title -->Squeezing the social out of Wordpress<!-- /print.title -->
+					</a>
+				</li>
+				<!-- /render.cms.recent_post_titles -->
 				<!-- remove -->
 				<li class="blog_i"><a href="blog.html" class="blog_h">Securing tedybears</a></li>
 				<li class="blog_i"><a href="blog.html" class="blog_h">Lessons from good ol’ Ford</a></li>
