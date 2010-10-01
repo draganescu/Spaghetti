@@ -10,15 +10,14 @@ class cms
 		if(!preg_match("|admin|", $p->uri_string))
 			return true;
 		
-		if(isset($_SESSION['loggedin']))
-		{
+		if(preg_match("|login|", $p->uri_string))
 			return true;
-		}
+		
+		if(isset($_SESSION['loggedin']))
+			return true;
 		else
-		{
-			if($_GET['login'] = false)
-				header("Location: ".$p->link_uri."/admin?login=true");
-		}
+			die("you need to be logged in");
+		
 	}
 	
 	function the_resume()

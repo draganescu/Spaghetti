@@ -7,10 +7,11 @@ $portofolio->default = 'index';
 $portofolio->index_file = ""; // using htaccess
 
 $portofolio->template("/projects/*","migrations");
-$portofolio->template("/posts/*","blog");
+$portofolio->template("$/posts/*","blog");
 
 /* admin */
-$portofolio->template("/admin(/?)","login");
+$portofolio->template("/login","login");
+$portofolio->template("/admin/dashboard","dashboard");
 $portofolio->template("/admin/posts/new","addposts");
 $portofolio->template("/admin/posts/list","listposts");
 $portofolio->template("/admin/ideas/new","addideas");
