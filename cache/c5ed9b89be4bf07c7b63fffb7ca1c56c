@@ -22,19 +22,20 @@ Released   : 20100704
 <body id="">
 <div id="wrapper">
 	<div id="header">
-		<div id="logo">
-			<h1 class="render-cms.header_logo"><a href="#">Interchange</a></h1>
-			<p class="render-cms.header_slogan">template design by <a href="http://www.freecsstemplates.org/">CSS Templates</a></p>
-		</div>
-		<div id="search">
-			<form method="post" action="#">
-				<fieldset>
-					<input type="text" name="s" id="search-text" size="15" value="enter keywords here..." />
-					<input type="submit" id="search-submit" value="GO" />
-				</fieldset>
-			</form>
-		</div>
+	<div id="logo">
+		<h1 class="render-cms.header_logo"><a href="#">Interchange</a></h1>
+		<p class="render-cms.header_slogan">template design by <a href="http://www.freecsstemplates.org/">CSS Templates</a></p>
 	</div>
+	<div id="search">
+		<form method="post" action="#">
+			<fieldset>
+				<input type="text" name="s" id="search-text" size="15" value="dried ..." />
+				<input type="submit" id="search-submit" value="GO" />
+			</fieldset>
+		</form>
+	</div>
+</div>
+	
 	<!-- end #header -->
 	<div id="menu" class="render-cms.main_menu">
 		
@@ -61,6 +62,16 @@ Released   : 20100704
 							&nbsp;&bull;&nbsp; <a href="/comments/1" class="comments">Comments (missing_comments_number)</a> &nbsp;&bull;&nbsp; <a href="post.html?cms/post/print.id" class="permalink">Full article</a></p>
 						<div class="entry">
 							I got deleted the last time.
+						</div>
+					</div>
+				
+
+					<div class="post">
+						<h2 class="title"><a href="#"> a new post </a></h2>
+						<p class="meta">Posted by <a href="missing_author_profile">missing_author_name</a> on March 10, 2008
+							&nbsp;&bull;&nbsp; <a href="/comments/2" class="comments">Comments (missing_comments_number)</a> &nbsp;&bull;&nbsp; <a href="post.html?cms/post/print.id" class="permalink">Full article</a></p>
+						<div class="entry">
+							some post content
 						</div>
 					</div>
 				

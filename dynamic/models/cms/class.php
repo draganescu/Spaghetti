@@ -74,7 +74,7 @@ class cms
 		$blog = the::app();
 		$db = the::database();
 		
-		if(!$blog->has_post_data())
+		if($blog->no_post_data())
 			return false;
 		
 		$post_title = $blog->post('post_title');
@@ -84,5 +84,6 @@ class cms
 		
 		
 	}
+	
 }
 ?>

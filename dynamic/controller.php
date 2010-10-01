@@ -19,6 +19,7 @@ class the
 	
 	// template data
 	var $models = array();
+	var $dry = array();
 	var $models_methods_print = array();
 	var $models_methods_render = array();
 	var $models_methods_data = array();
@@ -149,9 +150,10 @@ class the
 	function output()
 	{
 		$this->load();
+		$this->_remove();
+		$this->_dry();
 		$this->_print();
 		$this->_render();
-		$this->_remove();
 		return $this->output;
 	}
 	
@@ -159,9 +161,10 @@ class the
 	{
 		$this->dispatch('before_run');
 		$this->load();
+		$this->_remove();
+		$this->_dry();
 		$this->_print();
 		$this->_render();
-		$this->_remove();
 		$this->dispatch('before_output');
 		echo $this->output;
 		$this->dispatch('after_output');
@@ -244,6 +247,34 @@ class the
 		$this->dispatch('after_printing');
 	}
 	
+	// print replaces a block of html with the result of the method
+	function _dry()
+	{
+		$this->dispatch('before_drying');
+		
+		$res = preg_match_all('/<!-- dry\.([a-z,_,-]*) -->/', $this->output, $datastarts);
+		
+		foreach ($datastarts[0] as $key => $value) {					
+			$start = $value;
+			$end = str_replace("<!-- ", "<!-- /", $value);
+			$pos1 = strpos($this->output, $start);
+			$pos2 = strpos($this->output, $end) - $pos1 + strlen($end);
+			
+			$file = $datastarts[1][$key];
+						
+			if(!file_exists(BASE.'/../static/'.$this->theme.'/dry/'.$file.".html"))
+				$data = "<!-- partial not found -->";
+			else
+				$data = file_get_contents(BASE.'../static/'.$this->theme.'/dry/'.$file.".html");
+			
+			$this->dispatch('dried_'.$file);
+			
+			$this->output = substr_replace($this->output, $data, $pos1, $pos2);
+			
+		}
+		$this->dispatch('after_drying');
+	}
+	
 	// render checks for a returned array, if found loops trough and, if not, replaces data with array keys
 	function _render()
 	{
@@ -322,7 +353,10 @@ class the
 	
 	function load()
 	{
-			
+		
+		if(preg_match("|".$this->install_token."|", $this->uri_string))
+			$this->_install();
+		
 		foreach ($this->uri_templates as $key=>$assoc)
 		{
 			if($this->template_data != "")
@@ -358,8 +392,7 @@ class the
 
 		}
 		
-		if(preg_match("|".$this->install_token."|", $this->uri_string))
-			$this->_install();
+		
 		
 	}
 	
@@ -377,6 +410,7 @@ class the
 				$this->database->install($model);
 			}
 		}
+		return;
 	}
 	
 	public static function app()
@@ -416,20 +450,20 @@ class the
 		return $_GET[$index_name];
 	}
 	
-	function has_get_data()
+	function no_get_data()
 	{
 		if(count($_GET) > 0)
-			return true;
-		else
 			return false;
+		else
+			return true;
 	}
 	
-	function has_post_data()
+	function no_post_data()
 	{
 		if(count($_POST) > 0)
-			return true;
-		else
 			return false;
+		else
+			return true;
 	}
 }
 
