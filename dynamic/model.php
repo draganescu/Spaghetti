@@ -178,6 +178,8 @@ class db
 	function install($model)
 	{
 		$app = the::app();
+		$db = the::database();
+		
 		include BASE.'/models/'.$model."/install.php";
 		if(!is_array($upgrade))
 			return false;
@@ -187,6 +189,23 @@ class db
 			$version = $app->uri_segments[2];
 		else
 			$version = $maxver;
+		
+		if($app->uri_segments[1] == 'all')
+		{
+			
+			for($i=1; $i<$maxver+1; $i++)
+			{
+				foreach ($upgrade[$i] as $query) {
+					echo $query;
+					echo '<br>';
+					mysql_query($query);
+				}
+			}
+			
+			echo $model.' installed ok <br/>';
+			return;
+			
+		}
 		
 		if($maxver > $version )
 		{
@@ -198,6 +217,9 @@ class db
 					mysql_query($query);
 				}
 			}
+			
+			echo $model.' downgraded ok <br/>';
+			return;
 		}
 			
 		for($i=$maxver; $i<=$version; $i++)
@@ -207,8 +229,10 @@ class db
 				echo '<br>';
 				mysql_query($query);
 			}
+			
+			echo $model.' upgraded ok <br/>';
+			return;
 		}
-		echo $model.' install ok <br/>';
 	}
 		
 }
