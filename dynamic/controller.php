@@ -446,21 +446,33 @@ class the
 	function _install()
 	{
 		
-		if(array_key_exists(1, $this->uri_segments))
+		
+		
+		if(array_key_exists(1, $this->uri_segments) && $this->uri_segments[1] != "")
 		{ 
-			$this->database->install($this->uri_segments[1]);
-		}
-		else
-		{
-			$m = opendir(BASE.'models');
+			$model = $this->uri_segments[1];
 			
-			while ($model = readdir($m))
+			if($model == 'all')
 			{
-				if($model != "." && $model != "..")
+				$m = opendir(BASE.'models');
+
+				while ($model = readdir($m))
+				{
+					if($model != "." && $model != "..")
+					$this->database->install($model);
+				}
+			}
+			else
+			{
 				$this->database->install($model);
 			}
 		}
-		die();
+		else
+		{
+			die('No model selected. Use `all` for first run.');
+		}
+		
+		die("Procedure completed.");
 	}
 	
 	public static function app()
