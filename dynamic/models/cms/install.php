@@ -31,3 +31,14 @@ $upgrade[1][] = "CREATE TABLE `projects` (
 					PRIMARY KEY (`id`))
 					ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
 $downgrade[1][] = "drop table projects";
+$upgrade[1][] = "CREATE TABLE `contacts` (
+					`id` INT(3) UNSIGNED AUTO_INCREMENT,
+					`email` VARCHAR(32),
+					`message` TEXT,
+					PRIMARY KEY (`id`))
+					ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
+$downgrade[1][] = "drop table contacts";
+
+// fix the truncated work title
+$upgrade[2][] = "ALTER TABLE `work` CHANGE `title` `title` varchar(255) NULL DEFAULT NULL;";
+$downgrade[2][] = "ALTER TABLE `work` CHANGE `title` `title` varchar(32) NULL DEFAULT NULL;";

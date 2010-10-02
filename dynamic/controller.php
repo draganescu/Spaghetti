@@ -23,6 +23,7 @@ class the
 	var $models_methods_print = array();
 	var $models_methods_render = array();
 	var $models_methods_data = array();
+	var $current_block = "";
 	
 		
 	// instances of loaded models
@@ -58,13 +59,15 @@ class the
 	var $events = array();
 	var $debug_events = false; // shows each dispatched event as a comment in the output
 	
-	function the()
+	function setup()
 	{
 		// find base URI
 		$data = explode($this->base_file,str_replace('//','/',dirname($_SERVER['PHP_SELF']).'/'));
 		$this->base_uri = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$data[0];
 		
 		$this->uri_string = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		
+		$this->link_uri = $this->base_uri.$this->index_file;
 		
 		$parts = explode($_SERVER['HTTP_HOST'].$data[0], $this->uri_string);
 		if(array_key_exists(1, $parts))
@@ -162,6 +165,7 @@ class the
 	function run()
 	{
 		$this->dispatch('before_run');
+		$this->setup();
 		$this->load();
 		$this->_remove();
 		$this->_dry();
@@ -184,7 +188,7 @@ class the
 		
 		// replacing global data
 		foreach ($this->replace as $where => $replacements) {
-			if(preg_match("|".$where."|", $this->uri_string))
+			if(preg_match("%".$where."%", $this->uri_string))
 			{
 				foreach ($replacements as $value) {
 					$this->template_data = str_replace($value[0], $value[1], $this->template_data);
@@ -194,7 +198,7 @@ class the
 		
 		
 		// todo:add check $res if there are no matches
-		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z_,-]*))) -->/', $this->template_data, $methodstarts);
+		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z_,\-\(\)\'\"]*))) -->/', $this->template_data, $methodstarts);
 		
 		// we need to load these models
 		$this->models = array_unique($methodstarts[4]);
@@ -232,7 +236,7 @@ class the
 			
 			if(!method_exists($model, $method))
 			{
-				$this->output = substr_replace($this->output, "missing_metod".$model."_".$method, $pos1, $pos2);
+				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
 			}	
 			
@@ -289,14 +293,25 @@ class the
 			$pos1 = strpos($this->output, $start);
 			$pos2 = strpos($this->output, $end) - $pos1 + strlen($end);
 			
-			if(!method_exists($model, $method))
+			$this->current_block = substr($this->output, $pos1, $pos2);
+			
+			$test = explode("(", $method);
+			
+			if(!method_exists($model, $test[0]))
 			{
-				$this->output = substr_replace($this->output, "missing_metod".$model."_".$method, $pos1, $pos2);
+				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
 			}
 			
 			$object = $this->objects[$model];
-			$data_arr = $object->$method();
+			if(strpos($method, "(") === false)
+				$data_arr = $object->$method();
+			else
+			{
+				eval('$data_arr = $object->'.$method.';');
+			}
+				
+				
 			$this->dispatch('executed_'.$model."_".$method);
 			
 			
@@ -307,7 +322,13 @@ class the
 			$rendered_data = "";
 			
 			if($data_arr == false)
-				return;
+				continue;
+				
+			if(is_string($data_arr))
+			{
+				$this->output = substr_replace($this->output, $data_arr, $pos1, $pos2);
+				continue;
+			}
 			
 			foreach($data_arr as $data)
 			{
@@ -327,8 +348,7 @@ class the
 			$this->output = substr_replace($this->output, $rendered_data, $pos1, $pos2);
 		}
 		// manage relative links
-		$this->output = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'/$3"', $this->output);
-		
+		$this->output = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'$3"', $this->output);
 		$this->dispatch('after_render');
 		
 	}
@@ -359,14 +379,15 @@ class the
 		include BASE.'model.php';
 		$this->database = db::connect();
 		
-		if(preg_match("|".$this->install_token."|", $this->uri_string))
+		if(preg_match("%".$this->install_token."%", $this->uri_string))
 			$this->_install();
 		
 		foreach ($this->uri_templates as $key=>$assoc)
 		{
 			if($this->template_data != "")
 				continue;
-			if(preg_match("|".$key."|", $this->uri_string))
+
+			if(preg_match("%".$key."%", $this->uri_string))
 				$this->_parse($assoc);
 		}
 		
@@ -415,7 +436,7 @@ class the
 				$this->database->install($model);
 			}
 		}
-		return;
+		die();
 	}
 	
 	public static function app()
@@ -440,11 +461,19 @@ class the
         return null;
     }
 
+	function route($location)
+	{
+		$p = the::app();
+		header("Location: ".$p->link_uri.$location);
+	}
+
 	// these are used for forms management and to be able to hook xss filters
 	function post($index_name)
 	{
 		$this->post_pointer = $index_name;
 		$this->dispatch("read_post_data");
+		if(!array_key_exists($index_name, $_POST))
+			return false;
 		return $_POST[$index_name];
 	}
 	
@@ -452,6 +481,8 @@ class the
 	{
 		$this->get_pointer = $index_name;
 		$this->dispatch("read_get_data");
+		if(!array_key_exists($index_name, $_GET))
+			return false;
 		return $_GET[$index_name];
 	}
 	

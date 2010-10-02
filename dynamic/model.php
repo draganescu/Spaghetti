@@ -54,7 +54,7 @@ class db
 		$resume = $db->querry("select * from `%s` where `id` = '%s'", array($table, $p->uri_segments[3]));
 						
 		foreach ($resume[0] as $key => $value) {
-			$p->current_block = str_replace('name="_'.$key.'"','name="_'.$key.'"'.' value="'.$value.'"', $p->current_block);
+			$p->current_block = preg_replace('/<input(.*?)name="_'.$key.'"/','$0 value="'.$value.'"', $p->current_block);
 			$p->current_block = preg_replace("/<textarea(.*?)name=\"_".$key."\"(.*?)>/", "$0".$value, $p->current_block);
 		}
 		$input = "<input type='hidden' name='edit_token' value='".$p->uri_segments[3]."' />";
@@ -67,7 +67,7 @@ class db
 		$p = the::app();
 		$db = the::database();
 		
-		$update_query = "update `$table` set --data-- where `id` = %s";
+		$update_query = "update `".$table."` set --data-- where `id` = %s";
 		
 		$data = "";
 		foreach ($_POST as $key => $value)
@@ -75,14 +75,17 @@ class db
 			if($key[0] == "_")
 			{
 				$key = substr($key, 1);
-				$data .= ",`$key` = '".$p->post("_".$key)."'";
+				$data .= ",`$key` = '%s'";
+				$v[] = $p->post("_".$key);
 			}
 		}
 		
 		$data = substr($data, 1);
 		$update_query = str_replace("--data--", $data, $update_query);
 		
-		$db->querry($update_query, array($p->post("edit_token")));
+		$v[] = $p->post("edit_token");
+		
+		$db->querry($update_query, $v);
 	}
 	
 	function form_insert($table)
@@ -91,24 +94,30 @@ class db
 		$db = the::database();
 		
 		//insert
-		$insert_query = "insert into `%s` ";
 		$fields = "";
 		$values = "";
+		$data = array($table);
+		
 		foreach ($_POST as $key => $value)
 		{
 			if($key[0] == "_")
 			{
 				$key = substr($key, 1);
-				$fields .= ",`$key`";
-				$values .= ",'".$p->post("_".$key)."'";
+				$fields .= ",`%s`";
+				$f[] = $key;
+				$values .= ", '%s'";
+				$v[] = $p->post("_".$key);
 			}
 		}
+		
+		$data = array_merge($data, $f, $v);
+		
 		$fields = substr($fields, 1);
 		$values = substr($values, 1);
-
-		$insert_query .= "($fields) values ($values)";
-
-		$db->querry($insert_query, array($table));
+		
+		$insert_query = "insert into %s (".$fields.") values (".$values.")";
+		
+		$db->querry($insert_query, $data);
 	}
 	
 	function querry()
@@ -124,6 +133,7 @@ class db
 			$args = array_map('mysql_real_escape_string', $args[0]);
 			array_unshift($args, $query);
 		}
+		
 	    $query = call_user_func_array('sprintf', $args);
 	    $result = mysql_query($query) or die(mysql_error());
 	    if($result === true)

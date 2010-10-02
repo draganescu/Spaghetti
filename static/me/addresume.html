@@ -15,26 +15,26 @@
 	<body class="edit_html">
 		
 		<div id="header">
-			<a href="dashboard.html?su=/admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
+			<a href="dashboard.html?su=admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
 
 			<h2 id="slogan">Data management</h2>
 			
-			<a id="contact" href="login.html?su=/admin/logout">Log out</a>
+			<a id="contact" href="login.html?su=login/?do=logout">Log out</a>
 		</div>
 		
 		<div id="post">
 			<h2 class="post_t">Add / Edit Resume</h2>
 			
 			<!-- render.cms.manage_resume -->
-			<form action="#" method="post">
-				<label class="timespan_label" for="timespan">Time span</label>
-				<input type="text" id="timespan" name="timespan" />
+			<form action="" method="post">
+				<label class="time_span_label" for="timespan">Time span</label>
+				<input type="text" id="time_span" name="_time_span" />
 				
-				<label class="title_label" for="title">Position, Company</label>
-				<input type="text" id="title" name="title" />
+				<label class="position_company_label" for="position_company">Position, Company</label>
+				<input type="text" id="position_company" name="_position_company" />
 				
-				<label class="content_label" for="content">Description</label>
-				<textarea name="content" id="content"></textarea>
+				<label class="description_label" for="description">Description</label>
+				<textarea name="_description" id="description"></textarea>
 				
 				<label></label>
 				<input type="submit" id="save" name="save" value="Save" />
@@ -56,8 +56,8 @@
 			<h3 class="recent_work_t">Work</h3>
 
 			<ul class="recent_work_l">
-				<li class="recent_work_i"><a href="listwork.html?su=/admin/work/list" class="recent_work_h">List entries</a></li>
-				<li class="recent_work_i"><a href="addwork.html?su=/admin/work/new" class="recent_work_h">Add new entry</a></li>
+				<li class="recent_work_i"><a href="listwork.html?su=admin/work/list" class="recent_work_h">List entries</a></li>
+				<li class="recent_work_i"><a href="addwork.html?su=admin/work/new" class="recent_work_h">Add new entry</a></li>
 			</ul>
 		</div>
 		
@@ -65,8 +65,8 @@
 			<h3 class="blog_t">Blog</h3>
 
 			<ul id="blog_l">
-				<li class="blog_i"><a href="listposts.html?su=/admin/posts/list" class="blog_h">List entries</a></li>
-				<li class="blog_i"><a href="addposts.html?su=/admin/posts/new" class="blog_h">Add new endtry</a></li>
+				<li class="blog_i"><a href="listposts.html?su=admin/posts/list" class="blog_h">List entries</a></li>
+				<li class="blog_i"><a href="addposts.html?su=admin/posts/new" class="blog_h">Add new entry</a></li>
 			</ul>
 
 		</div>
@@ -75,8 +75,8 @@
 			<h3 class="ideas_t">Projects</h3>
 
 			<ul id="ideas_l">
-				<li class="ideas_i"><a href="listideas.html?su=/admin/ideas/list" class="ideas_h">List entries</a></li>
-				<li class="ideas_i"><a href="addideas.html?su=/admin/ideas/new" class="ideas_h">Add new endtry</a></li>
+				<li class="ideas_i"><a href="listideas.html?su=admin/ideas/list" class="ideas_h">List entries</a></li>
+				<li class="ideas_i"><a href="addideas.html?su=admin/ideas/new" class="ideas_h">Add new entry</a></li>
 			</ul>
 		</div>
 		
@@ -84,8 +84,8 @@
 			<h3 class="tools_t">Resume</h3>
 
 			<ul id="tools_l">
-				<li class="tools_i"><a href="listresume.html?su=/admin/resume/list" class="tools_h">List entries</a></li>
-				<li class="tools_i"><a href="addresume.html?su=/admin/resume/new" class="tools_h">Add new endtry</a></li>
+				<li class="tools_i"><a href="listresume.html?su=admin/resume/list" class="tools_h">List entries</a></li>
+				<li class="tools_i"><a href="addresume.html?su=admin/resume/new" class="tools_h">Add new entry</a></li>
 			</ul>
 		</div>
 		

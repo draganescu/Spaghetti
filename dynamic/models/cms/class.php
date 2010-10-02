@@ -2,28 +2,26 @@
 class cms
 {
 	
-	function login_check()
-	{
-		session_start();
-		$p = the::app();
-		
-		if(!preg_match("|admin|", $p->uri_string))
-			return true;
-		
-		if(preg_match("|login|", $p->uri_string))
-			return true;
-		
-		if(isset($_SESSION['loggedin']))
-			return true;
-		else
-			die("you need to be logged in");
-		
-	}
-	
 	function the_resume()
 	{
 		$db = the::database();
 		return $db->select_recent_resume();
+	}
+	
+	function the_post()
+	{
+		$p = the::app();
+		$db = the::database();
+		
+		return $db->load_by_id("blog", $p->uri_segments[1]);
+	}
+	
+	function the_page()
+	{
+		$p = the::app();
+		$db = the::database();
+		
+		return $db->load_by_id("projects", $p->uri_segments[1]);
 	}
 	
 	function recent_post_titles()
@@ -40,16 +38,81 @@ class cms
 	function recent_work()
 	{
 		$db = the::database();
-		return $db->select_recent_post_titles(3);
+		return $db->select_recent_work(3);
 	}
+	
+	/*work*/
+	function the_work($type)
+	{
+		$db = the::database();
+		return $db->select_work_by_type($type);	
+	}
+	
 	
 	function the_ideas()
 	{
 		$db = the::database();
-		return $db->select_recent_ideas();
+		return $db->select_ideas();
 	}
 	
 	
+	function select_resume()
+	{
+		$resume = the::database();
+		return $resume->get_resume();
+	}
 	
+	function manage_resume()
+	{
+		$db = the::database();
+		return $db->manage_data("resume");
+	}
+	
+	function select_ideas()
+	{
+		$resume = the::database();
+		return $resume->get_ideas();
+	}
+	
+	function manage_ideas()
+	{
+		$db = the::database();
+		return $db->manage_data("projects");
+	}
+	
+	function select_posts()
+	{
+		$resume = the::database();
+		return $resume->get_posts();
+	}
+	
+	function manage_post()
+	{
+		$p = the::app();
+		
+		if($p->post("type"))
+			$_POST["_types"] = implode(",", $p->post("type"));
+		
+		$db = the::database();
+		return $db->manage_data("blog");
+	}
+	
+	function select_work()
+	{
+		$resume = the::database();
+		return $resume->get_work();
+	}
+	
+	function manage_work()
+	{
+		$p = the::app();
+		
+		if($p->post("type"))
+			$_POST["_types"] = implode(",", $p->post("type"));
+
+		$db = the::database();
+		return $db->manage_data("work");
+	}
+		
 }
 ?>

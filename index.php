@@ -6,22 +6,23 @@ $portofolio->default = 'index';
 
 $portofolio->index_file = ""; // using htaccess
 
-$portofolio->template("/projects/*","migrations");
-$portofolio->template("$/posts/*","blog");
+$portofolio->template("/projects/\d","page");
+$portofolio->template("/posts/\d","blog");
+$portofolio->template("/portofolio*","work");
 
 /* admin */
 $portofolio->template("/login","login");
 $portofolio->template("/admin/dashboard","dashboard");
 $portofolio->template("/admin/posts/new","addposts");
-$portofolio->template("/admin/posts/list","listposts");
+$portofolio->template("/admin/(posts|blog)/list","listposts");
 $portofolio->template("/admin/ideas/new","addideas");
-$portofolio->template("/admin/ideas/list","listideas");
-$portofolio->template("/admin/resume/new","addresumt");
+$portofolio->template("/admin/(ideas|projects)/list","listideas");
+$portofolio->template("/admin/resume/new","addresume");
 $portofolio->template("/admin/resume/list","listresume");
 $portofolio->template("/admin/work/new","addwork");
 $portofolio->template("/admin/work/list","listwork");
 
-$portofolio->observe('before_output','cms','login_check');
+$portofolio->observe('before_output','users','login_check');
 
 
 $portofolio->server('local.host','development');

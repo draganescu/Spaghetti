@@ -15,11 +15,11 @@
 	<body class="edit_html">
 		
 		<div id="header">
-			<a href="dashboard.html?su=/admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
+			<a href="dashboard.html?su=admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
 
 			<h2 id="slogan">Data management</h2>
 			
-			<a id="contact" href="login.html?su=/admin/logout">Log out</a>
+			<a id="contact" href="login.html?su=login/?do=logout">Log out</a>
 		</div>
 		
 		<div id="post">
@@ -30,16 +30,16 @@
 				<thead>
 					<tr>
 						<th>Title</th>
-						<th>Date</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
+					<!-- render.cms.select_posts -->
 					<tr>
-						<td>Squeezing the social out of wordpress</td>
-						<td>12 dec 2010</td>
-						<td><a href="addposts.html?su=/admin/posts/edit/<!-- print.id -->1<!-- /print.id -->">Edit</a> | <a href="listposts.html?su=/admin/posts/delete/<!-- print.id -->1<!-- /print.id -->">Delete</a></td>
+						<td><!-- print.title -->Squeezing the social out of wordpress<!-- /print.title --></td>
+						<td><a href="addposts.html?su=admin/posts/new/<!-- print.id -->1<!-- /print.id -->">Edit</a> | <a href="listposts.html?su=admin/posts/new/-<!-- print.id -->1<!-- /print.id -->">Delete</a></td>
 					</tr>
+					<!-- /render.cms.select_posts -->
 				</tbody>
 			</table>
 		</div>
@@ -54,8 +54,8 @@
 			<h3 class="recent_work_t">Work</h3>
 
 			<ul class="recent_work_l">
-				<li class="recent_work_i"><a href="listwork.html?su=/admin/work/list" class="recent_work_h">List entries</a></li>
-				<li class="recent_work_i"><a href="addwork.html?su=/admin/work/new" class="recent_work_h">Add new entry</a></li>
+				<li class="recent_work_i"><a href="listwork.html?su=admin/work/list" class="recent_work_h">List entries</a></li>
+				<li class="recent_work_i"><a href="addwork.html?su=admin/work/new" class="recent_work_h">Add new entry</a></li>
 			</ul>
 		</div>
 		
@@ -63,8 +63,8 @@
 			<h3 class="blog_t">Blog</h3>
 
 			<ul id="blog_l">
-				<li class="blog_i"><a href="listposts.html?su=/admin/posts/list" class="blog_h">List entries</a></li>
-				<li class="blog_i"><a href="addposts.html?su=/admin/posts/new" class="blog_h">Add new endtry</a></li>
+				<li class="blog_i"><a href="listposts.html?su=admin/posts/list" class="blog_h">List entries</a></li>
+				<li class="blog_i"><a href="addposts.html?su=admin/posts/new" class="blog_h">Add new entry</a></li>
 			</ul>
 
 		</div>
@@ -73,8 +73,8 @@
 			<h3 class="ideas_t">Projects</h3>
 
 			<ul id="ideas_l">
-				<li class="ideas_i"><a href="listideas.html?su=/admin/ideas/list" class="ideas_h">List entries</a></li>
-				<li class="ideas_i"><a href="addideas.html?su=/admin/ideas/new" class="ideas_h">Add new endtry</a></li>
+				<li class="ideas_i"><a href="listideas.html?su=admin/ideas/list" class="ideas_h">List entries</a></li>
+				<li class="ideas_i"><a href="addideas.html?su=admin/ideas/new" class="ideas_h">Add new entry</a></li>
 			</ul>
 		</div>
 		
@@ -82,8 +82,8 @@
 			<h3 class="tools_t">Resume</h3>
 
 			<ul id="tools_l">
-				<li class="tools_i"><a href="listresume.html?su=/admin/resume/list" class="tools_h">List entries</a></li>
-				<li class="tools_i"><a href="addresume.html?su=/admin/resume/new" class="tools_h">Add new endtry</a></li>
+				<li class="tools_i"><a href="listresume.html?su=admin/resume/list" class="tools_h">List entries</a></li>
+				<li class="tools_i"><a href="addresume.html?su=admin/resume/new" class="tools_h">Add new entry</a></li>
 			</ul>
 		</div>
 		

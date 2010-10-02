@@ -15,16 +15,17 @@
 	<body class="blog_html">
 		
 		<div id="header">
-			<a href="index.html?su=/" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
+			<a href="index.html?su=" class="name_h"><h1 id="name">Andrei Draganescu</h1></a>
 
 			<h2 id="slogan">visionary and skillful <br/> information architect and developer </h2>
 
 			<a id="contact" href="mailto:andrei@mindware.ro">andrei@mindware.ro</a>
 		</div>
-		
+		<!-- render.cms.the_page -->
 		<div id="post">
-			<h2 class="post_t">Migrations for CodeIgniter</h2>
+			<h2 class="post_t"><!-- print.title -->Migrations for CodeIgniter<!-- /print.title --></h2>
 			
+			<!-- print.body -->
 			<p>The easy and pretty Code Igniter Migrations Library. Well maybe the name is overdone a bit considering this is a rather simplistic approach, but somehow i have a strong feeling that a lot of people will find this to be an advantage (yes the overdone name, not the library itself).</p>
 			<p>Installing the library is nothing special:</p>
 			<ol>
@@ -55,7 +56,7 @@
 				)<br>
 			);<br>
 			</code></p>
-			
+			<!-- /print.body -->
 		</div>
 		
 		<div id="about">
@@ -69,7 +70,7 @@
 
 			<ul id="blog_l">
 				<!-- render.blog.recent_posts -->
-				<li class="blog_i"><a href="blog.html?su=/posts/<!-- print.post_id >1<!-- /print.post_id -->" class="blog_h">Squeezing the social out of Wordpress</a></li>
+				<li class="blog_i"><a href="blog.html?su=posts/<!-- print.post_id >1<!-- /print.post_id -->" class="blog_h">Squeezing the social out of Wordpress</a></li>
 				<!-- /render.blog.recent_posts -->
 				<!-- remove -->
 				<li class="blog_i"><a href="blog.html" class="blog_h">Securing tedybears</a></li>
