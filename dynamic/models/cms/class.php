@@ -1,6 +1,11 @@
 <?php
 class cms
 {
+	function cms()
+	{
+		$p = the::app();
+		$p->tweet_cache = 600;
+	}	
 	
 	function the_resume()
 	{
@@ -16,12 +21,38 @@ class cms
 		return $db->load_by_id("blog", $p->uri_segments[1]);
 	}
 	
+	function archives()
+	{
+		$db = the::database();
+		return $db->get_posts();
+	}
+	
 	function the_page()
 	{
 		$p = the::app();
 		$db = the::database();
 		
 		return $db->load_by_id("projects", $p->uri_segments[1]);
+	}
+	
+	function send_form()
+	{
+		$p = the::app();
+		if($p->no_post_data())
+			return false;
+		
+		include BASE.'helpers/htmlpurifier-4.2.0-standalone/HTMLPurifier.standalone.php';
+		$config = HTMLPurifier_Config::createDefault();
+		$config->set('Cache.DefinitionImpl', null);
+		$obj = new HTMLPurifier($config);
+		$email = $obj->purify($p->post('email'));
+		$message = $obj->purify($p->post('message'));
+		
+		$db = the::database();
+		$db->insert_a_contact($email,$message);
+		
+		return $p->html('html/thank_you');
+		
 	}
 	
 	function recent_post_titles()
@@ -32,7 +63,42 @@ class cms
 	
 	function twitter()
 	{
-		return "Now i dont.";
+		$p = the::app();
+		
+		$cache_file = BASE.'models/cms/tweet.txt';
+		$latest_tweet = file_get_contents($cache_file);
+		$cache = filemtime($cache_file);		
+		
+		if(time() - $cache > $p->tweet_cache)
+		{
+			$url = "http://search.twitter.com/search.json?q=from:scriitoru&rpp=1";
+			$content = file_get_contents($url);
+			
+			if(!$content)
+				return "Now i dont.";
+			
+			$content = json_decode($content);
+			$latest_tweet = $content->results[0]->text;
+			
+			file_put_contents($cache_file, $latest_tweet);
+			
+		}
+		
+		return $latest_tweet;
+		
+		
+	}
+	
+	function the_contacts()
+	{
+		$p = the::app();
+		$db = the::database();
+
+		if(array_key_exists(2, $p->uri_segments))
+			if(strpos($p->uri_segments[2], "-") !== false)
+				$db->remove_by_id('contacts', substr($p->uri_segments[2],1));
+		
+		return $db->get_contacts();
 	}
 	
 	function recent_work()
@@ -113,6 +179,6 @@ class cms
 		$db = the::database();
 		return $db->manage_data("work");
 	}
-		
+
 }
 ?>

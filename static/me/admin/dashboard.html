@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Andrei Draganescu</title>	
+		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/typography.css" type="text/css" media="all" title="style" />
+		<link rel="stylesheet" href="css/decorations.css" type="text/css" media="all" title="style" />
+		<!--[if lt IE 8]>
+			<link rel="stylesheet" href="css/ie67.css" type="text/css" media="all" title="style" />
+		<![endif]-->
+	</head>
+	<body class="dashboard_html">
+		
+		<div id="header">
+			<a href="dashboard.html?su=admin/dashboard" class="name_h"><h1>Spaghetti</h1></a>
+
+			<h2 id="slogan">Dashboard</h2>
+			
+			<a id="contact" href="login.html?su=login/?do=logout">Log out</a>
+		</div>
+		
+		<div id="cover_letter">
+			<h3 class="cover_letter_t">Help</h3>
+
+			<p class="cover_letter_p">Use the dashboard mainly to check for messages from the website. It also provides links to all the data management features of the backend.</p>
+
+		</div>
+		
+		
+		
+		<div id="recent_work">
+			<h3 class="recent_work_t">Work</h3>
+
+			<ul class="recent_work_l">
+				<li class="recent_work_i"><a href="listwork.html?su=admin/work/list" class="recent_work_h">List entries</a></li>
+				<li class="recent_work_i"><a href="addwork.html?su=admin/work/new" class="recent_work_h">Add new entry</a></li>
+			</ul>
+		</div>
+		
+		
+		
+		<div id="blog_posts">
+			<h3 class="blog_t">Blog</h3>
+
+			<ul id="blog_l">
+				<li class="blog_i"><a href="listposts.html?su=admin/posts/list" class="blog_h">List entries</a></li>
+				<li class="blog_i"><a href="addposts.html?su=admin/posts/new" class="blog_h">Add new entry</a></li>
+			</ul>
+
+		</div>
+		
+		<div id="twitter">
+			<h3 class="twitter_t">Latest messages</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Email</th>
+						<th>Message</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- render.cms.the_contacts -->
+					<tr>
+						<td>
+							<!-- print.email -->
+							Lonely planet
+							<!-- /print.email -->
+						</td>
+						<td>
+							<!-- print.message -->
+							You need more marketing	
+							<!-- /print.message -->
+						</td>
+						<td>
+							<a href="dashboard.html?su=admin/dashboard/-<!-- print.id -->1<!-- /print.id -->">Delete</a>
+						</td>
+					</tr>
+					<!-- /render.cms.the_contacts -->
+				</tbody>
+			</table>
+		</div>
+		
+		
+		<div id="ideas">
+			<h3 class="ideas_t">Projects</h3>
+
+			<ul id="ideas_l">
+				<li class="ideas_i"><a href="listideas.html?su=admin/ideas/list" class="ideas_h">List entries</a></li>
+				<li class="ideas_i"><a href="addideas.html?su=admin/ideas/new" class="ideas_h">Add new entry</a></li>
+			</ul>
+		</div>
+		
+		<div id="tools">
+			<h3 class="tools_t">Resume</h3>
+
+			<ul id="tools_l">
+				<li class="tools_i"><a href="listresume.html?su=admin/resume/list" class="tools_h">List entries</a></li>
+				<li class="tools_i"><a href="addresume.html?su=admin/resume/new" class="tools_h">Add new entry</a></li>
+			</ul>
+		</div>
+				
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

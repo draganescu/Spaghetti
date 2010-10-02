@@ -85,6 +85,11 @@ class the
 		
 	}
 	
+	function html($file)
+	{
+		return file_get_contents(BASE.'../static/'.$this->theme.'/'.$file.'.'.$this->tpl_file_extension);
+	}
+	
 	function observe($event, $model, $method)
 	{
 		$this->events[$event][] = array($model, $method);
@@ -155,10 +160,9 @@ class the
 	function output()
 	{
 		$this->load();
-		$this->_remove();
-		$this->_dry();
 		$this->_print();
 		$this->_render();
+		$this->_remove();
 		return $this->output;
 	}
 	
@@ -167,10 +171,9 @@ class the
 		$this->dispatch('before_run');
 		$this->setup();
 		$this->load();
-		$this->_remove();
-		$this->_dry();
 		$this->_print();
 		$this->_render();
+		$this->_remove();
 		$this->dispatch('before_output');
 		echo $this->output;
 		$this->dispatch('after_output');
@@ -184,7 +187,7 @@ class the
 			$this->theme = $file[0];
 			$file = $file[1];
 		}
-		$this->template_data = file_get_contents(BASE.'../static/'.$this->theme.'/'.$file.'.'.$this->tpl_file_extension);
+		$this->template_data = $this->html($file);
 		
 		// replacing global data
 		foreach ($this->replace as $where => $replacements) {
@@ -196,9 +199,12 @@ class the
 			}
 		}
 		
+		$this->output = $this->template_data;
+		
+		$this->_dry();
 		
 		// todo:add check $res if there are no matches
-		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z_,\-\(\)\'\"]*))) -->/', $this->template_data, $methodstarts);
+		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z_,\-\(\)\'\"]*))) -->/', $this->output, $methodstarts);
 		
 		// we need to load these models
 		$this->models = array_unique($methodstarts[4]);
@@ -214,7 +220,7 @@ class the
 		
 		
 		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />";
-		$this->output = str_replace('<head>', "<head>\n".$base, $this->template_data);
+		$this->output = str_replace('<head>', "<head>\n".$base, $this->output);
 		
 		
 		
@@ -256,10 +262,15 @@ class the
 	// print replaces a block of html with the result of the method
 	function _dry()
 	{
+		
 		$this->dispatch('before_drying');
 		
-		$res = preg_match_all('/<!-- dry\.([a-z,_,-]*) -->/', $this->output, $datastarts);
+		// remove res comments in files
+		$this->output = preg_replace('/<!-- (\/?)res\.([a-z,_,-]*) -->/', "", $this->output);
 		
+		$res = preg_match_all('/<!-- dry\.([a-z,_,-,\/]*)\.([a-z,_,-]*) -->/', $this->output, $datastarts);
+		
+		$loaded_files = array();
 		foreach ($datastarts[0] as $key => $value) {					
 			$start = $value;
 			$end = str_replace("<!-- ", "<!-- /", $value);
@@ -268,10 +279,22 @@ class the
 			
 			$file = $datastarts[1][$key];
 						
-			if(!file_exists(BASE.'/../static/'.$this->theme.'/dry/'.$file.".html"))
-				$data = "<!-- partial not found -->";
+			if(!file_exists(BASE.'/../static/'.$this->theme.'/'.$file.".html"))
+				$data = "<!-- template not found -->";
 			else
-				$data = file_get_contents(BASE.'../static/'.$this->theme.'/dry/'.$file.".html");
+			{
+				if(!array_key_exists($file,$loaded_files))
+					$loaded_files[$file] = file_get_contents(BASE.'../static/'.$this->theme.'/'.$file.".html");
+					
+				$data = $loaded_files[$file];
+			}
+			
+			$drystart = "<!-- res.".$datastarts[2][$key]." -->";
+			$dryend = "<!-- /res.".$datastarts[2][$key]." -->";
+			$drypos1 = strpos($data, $drystart) + strlen($drystart);
+			$drypos2 = strpos($data, $dryend) - $drypos1;
+			
+			$data = substr($data, $drypos1, $drypos2);
 			
 			$this->dispatch('dried_'.$file);
 			
@@ -304,13 +327,11 @@ class the
 			}
 			
 			$object = $this->objects[$model];
+			
 			if(strpos($method, "(") === false)
 				$data_arr = $object->$method();
 			else
-			{
 				eval('$data_arr = $object->'.$method.';');
-			}
-				
 				
 			$this->dispatch('executed_'.$model."_".$method);
 			
@@ -322,7 +343,10 @@ class the
 			$rendered_data = "";
 			
 			if($data_arr == false)
+			{
+				$this->output = substr_replace($this->output, $render_template, $pos1, $pos2);
 				continue;
+			}
 				
 			if(is_string($data_arr))
 			{
@@ -362,7 +386,7 @@ class the
 	// remove deletes the not needed content
 	function _remove()
 	{
-		$res = preg_match_all('/<!-- remove -->/', $this->template_data, $removesStarts);
+		$res = preg_match_all('/<!-- remove -->/', $this->output, $removesStarts);
 		foreach ($removesStarts[0] as $key => $value) {
 			$start = $value;
 			$end = str_replace("<!-- ", "<!-- /", $value);
