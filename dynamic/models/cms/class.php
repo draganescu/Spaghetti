@@ -121,52 +121,17 @@ class cms
 		return $db->select_ideas();
 	}
 	
-	
-	function select_resume()
+	function select($data)
 	{
+		$sql = "get_".$data;
 		$resume = the::database();
-		return $resume->get_resume();
+		return $resume->$sql();
 	}
 	
-	function manage_resume()
+	function manage($data)
 	{
 		$db = the::database();
-		return $db->manage_data("resume");
-	}
-	
-	function select_ideas()
-	{
-		$resume = the::database();
-		return $resume->get_ideas();
-	}
-	
-	function manage_ideas()
-	{
-		$db = the::database();
-		return $db->manage_data("projects");
-	}
-	
-	function select_posts()
-	{
-		$resume = the::database();
-		return $resume->get_posts();
-	}
-	
-	function manage_post()
-	{
-		$p = the::app();
-		
-		if($p->post("type"))
-			$_POST["_types"] = implode(",", $p->post("type"));
-		
-		$db = the::database();
-		return $db->manage_data("blog");
-	}
-	
-	function select_work()
-	{
-		$resume = the::database();
-		return $resume->get_work();
+		return $db->manage_data($data);
 	}
 	
 	function manage_work()
