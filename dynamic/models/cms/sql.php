@@ -3,7 +3,7 @@
 $querries["select_recent_post_titles"] = "select id, title from blog order by id desc limit %s";
 $querries["select_recent_resume"] = "select * from resume order by id desc limit 5";
 $querries["select_recent_work"] = "select * from work order by id desc limit %s";
-$querries["select_ideas"] = "select * from projects order by id desc";
+$querries["select_ideas"] = "select * from projects order by id asc";
 $querries["select_work_by_type"] = "select * from work where types like '%%%s%%'";
 
 $querries["insert_a_resume"] = "insert into resume (`time_span`, `position_company`, `description`) values ('%s', '%s', '%s')";

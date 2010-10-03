@@ -5,11 +5,10 @@ $portofolio->theme = 'me';
 $portofolio->default = 'index';
 
 $portofolio->index_file = ""; // using htaccess
-$portofolio->debug_events = true; // using htaccess
 
 /* pages and blog */
 $portofolio->template("/projects/\d","page");
-$portofolio->template("/posts/\d","blog");
+$portofolio->template("/(posts|blog)/\d","blog");
 $portofolio->template("/portofolio*","work");
 $portofolio->template("/archives*","archives");
 
