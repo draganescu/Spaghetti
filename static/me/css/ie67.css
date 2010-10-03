@@ -39,9 +39,10 @@ body
 	margin-left:0;
 }
 
-* html #post
+#post
 {
 	margin-top: 20px;
+	clear:both;
 }
 
 #about
@@ -49,6 +50,15 @@ body
 	float: left;
 	width: 320px;
 	margin-top: 20px;
+	margin-left: 600px;
+}
+
+* html #about
+{
+	float: left;
+	width: 320px;
+	margin-top: 20px;
+	margin-left: 300px;
 }
 
 * html #about
@@ -75,8 +85,13 @@ body
 * html .blog_html #tools
 {
 	margin-left:300px;
-	margin-top: -163px;
+	margin-top: -186px;
 	width: 300px;
+}
+
+* html .blog_html #post
+{
+	overflow:hidden;
 }
 
 * html #resume
@@ -108,4 +123,46 @@ body
 
 legend{
 	margin-left: -5px;;
+}
+
+
+/* admin tweaks */
+.dashboard_html #header
+{
+	overflow:hidden;;
+}
+
+.dashboard_html #cover_letter
+{
+	overflow:hidden;
+	margin-left:0px;
+	position: relative;
+	left:460px;
+}
+
+* html .dashboard_html #cover_letter
+{
+	left:0;
+}
+
+.dashboard_html #recent_work, 
+.dashboard_html #ideas
+{
+	left:0;
+}
+
+.dashboard_html #blog_posts,
+.dashboard_html #tools
+{
+	left:250px;
+}
+
+* html .edit_html DIV.sidebar_block
+{
+	margin-left: 310px;
+}
+
+.edit_html #post
+{
+	padding-bottom: 20px;
 }
