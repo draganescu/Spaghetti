@@ -67,16 +67,19 @@ class the
 		
 		$this->uri_string = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
-		$this->link_uri = $this->base_uri.$this->index_file;
+		if($this->index_file == "")
+			$this->link_uri = $this->base_uri;
+		else
+			$this->link_uri = $this->base_uri.$this->index_file."/";
 		
 		$parts = explode($_SERVER['HTTP_HOST'].$data[0], $this->uri_string);
 		if(array_key_exists(1, $parts))
 			if($parts[1] != "")
 				$this->uri_segments = explode("/", $parts[1]);
-				
+		
 		if(array_key_exists(0, $this->uri_segments))
 			if($this->uri_segments[0] == $this->index_file)
-				unset($this->uri_segments[0]);
+				array_shift($this->uri_segments);
 		
 		$cwd = explode(DIRECTORY_SEPARATOR, __FILE__);
 		unset($cwd[count($cwd)-1]);
