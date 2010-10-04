@@ -243,7 +243,9 @@ class the
 			$pos1 = strpos($this->output, $start);
 			$pos2 = strpos($this->output, $end) - $pos1 + strlen($end);
 			
-			if(!method_exists($model, $method))
+			$test = explode("(", $method);
+			
+			if(!method_exists($model, $test[0]))
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
