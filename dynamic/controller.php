@@ -250,7 +250,11 @@ class the
 			}	
 			
 			$object = $this->objects[$model];
-			$data = $object->$method();
+			if(strpos($method, "(") === false)
+				$data = $object->$method();
+			else
+				eval('$data = $object->'.$method.';');
+			
 			$this->dispatch('executed_'.$model."_".$method);
 			
 			if($data == false)
