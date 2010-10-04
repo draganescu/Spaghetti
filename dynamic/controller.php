@@ -409,6 +409,14 @@ class the
 	function load()
 	{
 		
+		if(strpos($this->uri_segments[0], "_") !== false)
+		{
+			$this->uri_segments[0] = str_replace("_","",$this->uri_segments[0]);
+			$path = implode("/",$this->uri_segments);
+			header("Location: ".$this->base_uri.$path);
+			exit;
+		}
+		
 		include BASE.'model.php';
 		$this->database = db::connect();
 		
