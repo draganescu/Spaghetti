@@ -245,6 +245,13 @@ class the
 			
 			$test = explode("(", $method);
 			
+			if($model == 'session')
+			{
+				$this->output = substr_replace($this->output, $_SESSION[$method], $pos1, $pos2);
+				continue;
+			}
+
+			
 			if(!method_exists($model, $test[0]))
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
@@ -380,8 +387,7 @@ class the
 			}	
 			$this->output = substr_replace($this->output, $rendered_data, $pos1, $pos2);
 		}
-		// manage relative links
-		$this->output = preg_replace("/href=(\"|')(.*?)\?su=(.*?)(\"|')/", 'href="'.$this->link_uri.'$3"', $this->output);
+		$this->output = preg_replace("/(href|action)=(\"|')(.*?)\?su=(.*?)(\"|')/", '$1="'.$this->link_uri.'$4"', $this->output);
 		$this->dispatch('after_render');
 		
 	}
@@ -443,6 +449,7 @@ class the
 		{
 			if(!array_key_exists($model, $this->objects))
 			{
+				if($model == 'session') continue;
 				if(!file_exists(BASE.'models/'.$model.'/class.php'))
 				{
 					echo '<!-- missing_model_'.$model.' -->';
