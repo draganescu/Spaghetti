@@ -1,4 +1,5 @@
 <?php
+session_start()
 // this is the it
 class the
 {
@@ -247,7 +248,10 @@ class the
 			
 			if($model == 'session')
 			{
-				$this->output = substr_replace($this->output, $_SESSION[$method], $pos1, $pos2);
+				if(array_key_exists($method, $_SESSION))
+					$this->output = substr_replace($this->output, $_SESSION[$method], $pos1, $pos2);
+				else
+					$this->output = substr_replace($this->output, "", $pos1, $pos2);
 				continue;
 			}
 
