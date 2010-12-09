@@ -225,7 +225,7 @@ class the
 		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />";
 		$this->output = str_replace('<head>', "<head>\n".$base, $this->output);
 		
-		
+		$this->output = preg_replace("/(href|action)=(\"|')(.*?)\?su=(.*?)(\"|')/", '$1="'.$this->link_uri.'$4"', $this->output);
 		
 		$this->dispatch('template_parsed');
 	}
@@ -251,12 +251,14 @@ class the
 				continue;
 			}
 
-			
-			if(!method_exists($model, $test[0]))
+			if(!method_exists($model, $test[0]) && $model != 'db')
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
 			}	
+			
+			if($model == 'db')
+				$this->objects[$model] = the::database();
 			
 			$object = $this->objects[$model];
 			if(strpos($method, "(") === false)
@@ -336,11 +338,14 @@ class the
 			
 			$test = explode("(", $method);
 			
-			if(!method_exists($model, $test[0]))
+			if(!method_exists($model, $test[0]) && $model != 'db')
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
 			}
+			
+			if($model == 'db')
+				$this->objects[$model] = the::database();			
 			
 			$object = $this->objects[$model];
 			
@@ -387,7 +392,6 @@ class the
 			}	
 			$this->output = substr_replace($this->output, $rendered_data, $pos1, $pos2);
 		}
-		$this->output = preg_replace("/(href|action)=(\"|')(.*?)\?su=(.*?)(\"|')/", '$1="'.$this->link_uri.'$4"', $this->output);
 		$this->dispatch('after_render');
 		
 	}
@@ -449,7 +453,7 @@ class the
 		{
 			if(!array_key_exists($model, $this->objects))
 			{
-				if($model == 'session') continue;
+				if($model == 'session' || $model == 'data') continue;
 				if(!file_exists(BASE.'models/'.$model.'/class.php'))
 				{
 					echo '<!-- missing_model_'.$model.' -->';

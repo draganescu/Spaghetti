@@ -120,6 +120,7 @@ class db
 		$db->querry($insert_query, $data);
 	}
 	
+	
 	function querry()
 	{
 		$args = func_get_args();
