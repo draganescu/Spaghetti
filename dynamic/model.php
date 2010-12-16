@@ -18,7 +18,7 @@ class db
 			return $this->querry($this->querries[$name], $arguments);
 	}
 	
-	public function fetch($name)
+	public function fetch($name, $arguments)
 	{
 		$data = $this->querry($this->querries[$name], $arguments);
 		return array_shift($data[0]);

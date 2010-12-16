@@ -256,7 +256,7 @@ class the
 			}
 
 			
-			if(!method_exists($model, $test[0]))
+			if(!method_exists($model, $test[0]) && $model != 'pull')
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
