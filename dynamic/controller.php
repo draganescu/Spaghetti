@@ -222,7 +222,8 @@ class the
 		
 		
 		
-		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />";
+		$base = "<base href='".$this->base_uri."static/".$this->theme."/' /><script type='text/javascript'>var BASE = '".$this->link_uri."'</script>'";
+		
 		$this->output = str_replace('<head>', "<head>\n".$base, $this->output);
 		
 		
