@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 // this is the it
 class the
 {
@@ -339,8 +339,8 @@ class the
 			$this->current_block = substr($this->output, $pos1, $pos2);
 			
 			$test = explode("(", $method);
-			
-			if(!method_exists($model, $test[0]))
+						
+			if(!method_exists($model, $test[0]) && $model != 'pull')
 			{
 				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
 				continue;
@@ -453,6 +453,11 @@ class the
 		{
 			if(!array_key_exists($model, $this->objects))
 			{
+				if($model == 'pull')
+				{
+					$this->objects[$model] = the::database();
+					continue;
+				}
 				if($model == 'session') continue;
 				if(!file_exists(BASE.'models/'.$model.'/class.php'))
 				{
