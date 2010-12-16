@@ -9,9 +9,20 @@ class db
 	var $querries = array();
 	
 	public function __call($name, $arguments) {
+		if(strpos($name,"fetch") !== false)
+		{
+			$querry = str_replace("fetch_","", $name);
+			return $this->fetch($querry, $arguments);
+		}
 		if(array_key_exists($name, $this->querries))
 			return $this->querry($this->querries[$name], $arguments);
-    }
+	}
+	
+	public function fetch($name)
+	{
+		$data = $this->querry($this->querries[$name], $arguments);
+		return array_shift($data[0]);
+	}
 
 	function manage_data($table)
 	{
