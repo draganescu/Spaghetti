@@ -208,8 +208,7 @@ class the
 		$this->_dry();
 		
 		// todo:add check $res if there are no matches
-		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z_,\-\(\)\'\"]*))) -->/', $this->output, $methodstarts);
-		
+		$res = preg_match_all('/<!-- ((print|render)\.(([a-z_,-]*)\.([a-z,0-9_,\-\(\)\'\"]*))) -->/', $this->output, $methodstarts);
 		// we need to load these models
 		$this->models = array_unique($methodstarts[4]);
 		
@@ -256,13 +255,13 @@ class the
 			}
 
 			
-			if(!method_exists($model, $test[0]) && $model != 'pull')
-			{
-				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
-				continue;
-			}	
+			if(!method_exists($model, $test[0]))
+				/*$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
+				continue;*/
+				$object = the::database();
+			else	
+				$object = $this->objects[$model];
 			
-			$object = $this->objects[$model];
 			if(strpos($method, "(") === false)
 				$data = $object->$method();
 			else
@@ -339,14 +338,13 @@ class the
 			$this->current_block = substr($this->output, $pos1, $pos2);
 			
 			$test = explode("(", $method);
-						
-			if(!method_exists($model, $test[0]) && $model != 'pull')
-			{
-				$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
-				continue;
-			}
 			
-			$object = $this->objects[$model];
+			if(!method_exists($model, $test[0]))
+				/*$this->output = substr_replace($this->output, "missing_".$model."_".$method, $pos1, $pos2);
+				continue;*/
+				$object = the::database();
+			else	
+				$object = $this->objects[$model];
 			
 			if(strpos($method, "(") === false)
 				$data_arr = $object->$method();
@@ -453,11 +451,7 @@ class the
 		{
 			if(!array_key_exists($model, $this->objects))
 			{
-				if($model == 'pull')
-				{
-					$this->objects[$model] = the::database();
-					continue;
-				}
+				
 				if($model == 'session') continue;
 				if(!file_exists(BASE.'models/'.$model.'/class.php'))
 				{
