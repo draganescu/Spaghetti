@@ -222,11 +222,28 @@ class the
 		
 		
 		
-		$base = "<base href='".$this->base_uri."static/".$this->theme."/' /><script type='text/javascript'>var BASE = '".$this->link_uri."'</script>'";
-		
+		$base = "<base href='".$this->base_uri."static/".$this->theme."/' />\n<script type='text/javascript'>var BASE = '".$this->link_uri."'</script>'";
 		$this->output = str_replace('<head>', "<head>\n".$base, $this->output);
 		
+		//add the page's javascript
+		$scripts = "";
+		$m = opendir(BASE.'javascript/all');
+		while ($script = readdir($m))
+			if($script != "." && $script != "..")
+				$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/all".$script."'></script>\n";
 		
+		if($file == $this->default)
+			$file = "default";
+		
+		if(is_dir(BASE.'javascript/'.$file))
+		{
+			$m = opendir(BASE.'javascript/'.$file);
+			while ($script = readdir($m))
+				if($script != "." && $script != "..")
+					$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/".$file."/".$script."'></script>\n";
+		}
+		
+		$this->output = str_replace('</head>', $scripts."\n</head>\n", $this->output);
 		
 		$this->dispatch('template_parsed');
 	}
