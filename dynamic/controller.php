@@ -227,20 +227,20 @@ class the
 		
 		//add the page's javascript
 		$scripts = "";
-		$m = opendir(BASE.'javascript/all');
+		$m = opendir(BASE.'javascript/'.$this->theme.'/all');
 		while ($script = readdir($m))
 			if($script != "." && $script != "..")
-				$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/all".$script."'></script>\n";
+				$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/".$this->theme."/all/".$script."'></script>\n";
 		
 		if($file == $this->default)
 			$file = "default";
 		
-		if(is_dir(BASE.'javascript/'.$file))
+		if(is_dir(BASE.'javascript/'.$this->theme.'/'.$file))
 		{
-			$m = opendir(BASE.'javascript/'.$file);
+			$m = opendir(BASE.'javascript/'.$this->theme.'/'.$file);
 			while ($script = readdir($m))
 				if($script != "." && $script != "..")
-					$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/".$file."/".$script."'></script>\n";
+					$scripts .= "<script type='text/javascript' src='".$this->base_uri."/dynamic/javascript/".$this->theme."/".$file."/".$script."'></script>\n";
 		}
 		
 		$this->output = str_replace('</head>', $scripts."\n</head>\n", $this->output);
