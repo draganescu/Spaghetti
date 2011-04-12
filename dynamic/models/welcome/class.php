@@ -11,45 +11,53 @@ class welcome
 	
 	function hello_world()
 	{
+	
+		$model = factory(MODEL);
+		
+		$mailer = factory("PHP_Mailer");
+		
+		$welcome->authors("id", 1);
+		$welcome->categories("name", "PHP, Ruby; 'Programming zen'");
+		
+		$welcome->getPosts(); // a select
+		$welcome->getAuthors(); // another select
+		
+		$welcome->getAll(); // makes a join
+		
+		foreach ($welcome->posts as $key => $post)
+		{
+			$post->title;
+			$post->author;
+			foreach($post->categories as $category)
+			{
+				$category;
+			}
+			
+		}
+		
+		foreach ($welcome->all as $key => $item)
+		{
+			$item->posts("title");
+			foreach($item->categories() as $category)
+			{
+				$category->id;
+				$category->name;
+			}
+			$item->authors('expertise');
+		}
+		
+		$welcome->authors("name", "Mario Programmer");
+		$welcome->authors("expertise", array("Ravioli", "Tech reviews"));
+		$welcome->save("authors"); // now $welcome->authors->id is last_insert_id();
+		
+		$welcome->authors("id", 1);
+		
+		$welcome->update("authors");
+		
 		return "Hello World";
 	}
 	
-	/**
-	 * Advanced code
-	 * that is neat and i didnt want to delete it
-	*/
-	function cache()
-	{
-		$app = the::app();
-		$cache_life = $app->cache_life;
-		$file = md5($app->uri_string);
-		$created_at = false;
-		// this uri never been visited before
-		if(file_exists(BASE.'/../cache/'.$file))
-			$created_at = filemtime(BASE.'/../cache/'.$file);
-		else
-		{
-			if($app->output != "")
-				file_put_contents(BASE.'/../cache/'.$file, $app->output);
-		}
-			
-		if($created_at)
-		{
-			if(time() - $created_at < $cache_life)
-			{
-				echo file_get_contents(BASE.'/../cache/'.$file);
-				exit;
-			}
-			else
-			{
-				// expire cache
-				unlink(BASE.'/../cache/'.$file);
-				if($app->output != "")
-					file_put_contents(BASE.'/../cache/'.$file, $app->output);
-			}
-		}
-		
-	}
+	
 	
 }
 ?>

@@ -188,6 +188,7 @@ class db
 	
 	function install($model)
 	{
+		unset($upgrade, $downgrade, $i);
 		$app = the::app();
 		include BASE.'/models/'.$model."/install.php";
 		if(!is_array($upgrade))
@@ -203,20 +204,22 @@ class db
 		{
 			for($i=$maxver; $i>=$version; $i--)
 			{
+				if(!array_key_exists($i, $downgrade)) continue;
 				foreach ($downgrade[$i] as $query) {
 					echo $query;
 					echo '<br>';
-					mysql_query($query);
+					mysql_query($query) or die(mysql_error());
 				}
 			}
 		}
 			
-		for($i=$maxver; $i<=$version; $i++)
+		for($i=1; $i<=$version; $i++)
 		{
+			if(!array_key_exists($i, $upgrade)) continue;
 			foreach ($upgrade[$i] as $query) {
 				echo $query;
 				echo '<br>';
-				mysql_query($query);
+				mysql_query($query) or die(mysql_error());
 			}
 		}
 		echo $model.' install ok <br/>';
