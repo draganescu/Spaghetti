@@ -1,10 +1,10 @@
 <?php
-include 'dynamic/controller.php';
+//exit; //we have a bug that kills aw2 //sublime text
+include 'controller/my.php';
+$website = my::app();
+$website->theme = 'basic';
+$website->default = '404';
+$website->debug_events = true;
 
-$app = the::app();
-$app->theme = 'welcome';
-$app->default = 'index';
 
-$app->connection('local.host', 'localhost', 'spaghetti', 'root', '');
-
-$app->run();
+$website->run();
