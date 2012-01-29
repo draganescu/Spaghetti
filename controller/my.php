@@ -34,37 +34,13 @@ class my extends the
 	{	
 		$app = my::app();
 		switch ($app->current_server) {
-			case 'login.artweb.com':
-				$app->login_server = 'login.artweb.com';
-				$app->aw_server = 'www.artweb.com';
-				$app->env = "";
-				break;
-			
-			case 'login.alpha.artweb.com':
-				$app->login_server = 'login.alpha.artweb.com';
-				$app->aw_server = 'www.alpha.artweb.com';
-				$app->env = "alpha";
-				break;
-
-			case 'login.beta.artweb.com':
-				$app->login_server = 'login.beta.artweb.com';
-				$app->aw_server = 'www.beta.artweb.com';
-				$app->env = "beta";
-				break;
-			
-			case 'localhost/loginartwebcom':
-				$app->login_server = 'login.alpha.artweb.com';
-				$app->aw_server = 'www.alpha.artweb.com';
+			case 'localhost':
 				$app->env = "alpha";
 				break;
 			
 			default:
 				break;
 		}
-		$app->lang_domains = array(
-				$app->aw_server,
-				$app->login_server
-			);
 		return true;
 	}
 
