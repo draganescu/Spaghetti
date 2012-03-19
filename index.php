@@ -1,5 +1,5 @@
 <?php
-
+//test!!!
 include 'controller/my.php';
 $website = my::app();
 $website->theme = 'basic';
