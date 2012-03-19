@@ -1,5 +1,5 @@
 <?php
-//exit; //we have a bug that kills aw2 //sublime text
+
 include 'controller/my.php';
 $website = my::app();
 $website->theme = 'basic';
